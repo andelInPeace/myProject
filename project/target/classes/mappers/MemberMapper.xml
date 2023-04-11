@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.mapper.MemberMapper">
+
+	<insert id="insertMember" parameterType="MemberDTO">
+		INSERT INTO TBL_MEMBER (USER_NO , NAME, ID, PW, PHONE, EMAIL, ADMIN)
+		VALUES((SELECT NVL(MAX(USER_NO),0)+1 from TBL_MEMBER)
+				, #{name}
+				, #{id}
+				, #{pw}
+				, #{phone}
+				, #{email}
+				, #{admin})
+	</insert>
+	
+	<select id="selectMemberOne" resultType="MemberDTO">
+		SELECT USER_NO , NAME, ID, PW, PHONE, EMAIL, REGDATE. UPDATEDATE, ADMIN
+		FROM TBL_MEMBER WHERE USER_NO = #{user_no}
+	</select>
+	
+</mapper>
+
