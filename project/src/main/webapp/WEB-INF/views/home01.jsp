@@ -29,7 +29,7 @@
                 <!-- Masthead Avatar Image-->
                 <img class="masthead-avatar mb-5" src="/resources/assets/img/avataaars.svg" alt="..." />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">한번에 되면 좋겠는뎁</h1>
+                <h1 class="masthead-heading text-uppercase mb-0">오류와의 전쟁. 함께할 아군 모집 중.</h1>
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
@@ -37,7 +37,7 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0"> 현재 시각은 ${serverTime} .</p>
+                <p class="masthead-subheading font-weight-light mb-0"> 정신병 걸리기 좋은 시간 ${serverTime} .</p>
             </div>
 		</header>
 		

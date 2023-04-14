@@ -8,10 +8,12 @@ import com.example.project.domain.vo.MemberDTO;
 
 @Mapper
 public interface MemberMapper {
-	public void insertMember(MemberDTO memberDTO);
+	public void insertMember(MemberDTO member);
 	public List<MemberDTO> selectMemberAll();
-	public MemberDTO selectMemberOne(Long num);
-	public void updateMember(MemberDTO memberDTO);
-	public int delete(Long num);
+	public MemberDTO selectMemberOne(Long no);
+	public int updateMember(MemberDTO member);
+	public int delete(Long no); 
+	// 로그인으로 회원 찾기 
+	public MemberDTO findMemberOne(MemberDTO member);
 	
 }

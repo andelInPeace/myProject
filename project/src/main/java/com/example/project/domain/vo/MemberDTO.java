@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class MemberDTO {
 	
-	private int user_no;
+	private Long user_no;
 	private String name;
 	private String id;
 	private String pw;

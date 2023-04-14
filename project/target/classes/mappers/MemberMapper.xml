@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.project.mapper.MemberMapper">
 
+	<resultMap type="com.example.project.mapper.MemberMapper" id="MemberDTO">
+        <result property="user_no" column="USER_NO"/>
+     </resultMap>    
+
 	<insert id="insertMember" parameterType="MemberDTO">
 		INSERT INTO TBL_MEMBER (USER_NO , NAME, ID, PW, PHONE, EMAIL, ADMIN)
 		VALUES((SELECT NVL(MAX(USER_NO),0)+1 from TBL_MEMBER)
@@ -10,13 +14,43 @@
 				, #{pw}
 				, #{phone}
 				, #{email}
-				, #{admin})
+				, 0)
 	</insert>
 	
 	<select id="selectMemberOne" resultType="MemberDTO">
-		SELECT USER_NO , NAME, ID, PW, PHONE, EMAIL, REGDATE. UPDATEDATE, ADMIN
+		SELECT *
 		FROM TBL_MEMBER WHERE USER_NO = #{user_no}
 	</select>
+	
+	<select id="selectMemberAll" resultType="MemberDTO">
+			SELECT /*+ INDEX_DESC(TBL_MEMBER) */ 
+			*
+			FROM TBL_MEMBER					
+	</select>
+	
+	<select id="findMemberOne" resultType="MemberDTO">
+		SELECT *
+		FROM TBL_MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<update id="updateMember">
+		UPDATE TBL_MEMBER
+			SET NAME = #{name}
+				, id = #{id}	
+				, PW = #{pw}
+				, PHONE = #{phone}
+				, EMAIL = #{email}
+				, UPDATEDATE=SYSDATE
+		WHERE USER_NO = #{user_no}
+	</update>
+	
+	
+	
+	<delete id="delete">
+		DELETE FROM TBL_MEMBER WHERE USER_NO = #{user_no}
+	</delete>
+	
+	
 	
 </mapper>
 

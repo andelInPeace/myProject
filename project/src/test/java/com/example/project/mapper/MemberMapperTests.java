@@ -40,8 +40,32 @@ public class MemberMapperTests {
 	
 	@Test
 	public void selectMemberOne() {
-		MemberDTO memberDTO = memberMapper.selectMemberOne(6L);
+		MemberDTO memberDTO = memberMapper.selectMemberOne(2L);
 		log.info(memberDTO);
 	}
+	
+//	@Test
+//	public void selectMembeAll() {
+//		memberMapper.selectMemberAll().forEach(log::info);;
+//	}
+	
+//	@Test
+//	public void updateMember() {
+//		
+//		MemberDTO member = memberMapper.selectMemberOne(3L);
+//
+//		member.setPw("platina0101");
+//		member.setPhone("010-1234-5959");
+//		member.setEmail("platina02@gmail.com");
+//		memberMapper.updateMember(member);
+//		
+//		log.info(member);
+//	}
+	
+//	@Test
+//	public void deleteMember() {
+//		Long userNo = 3L;
+//		memberMapper.delete(userNo);
+//	}
 
 }

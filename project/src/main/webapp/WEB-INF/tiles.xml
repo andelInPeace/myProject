@@ -11,6 +11,27 @@
     	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
 	</definition>
+	
+	<definition name="/member/register" template="/WEB-INF/views/member/register.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
+	</definition>
+	
+	<definition name="/member/view" template="/WEB-INF/views/member/view.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
+	</definition>
+	
+	<definition name="/member/update" template="/WEB-INF/views/member/update.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
+	</definition>
+	
+	<definition name="/member/login" template="/WEB-INF/views/member/login.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
+	</definition>
+		
 		
 	<!-- 타일즈 미 적용 -->
 	<!--   
