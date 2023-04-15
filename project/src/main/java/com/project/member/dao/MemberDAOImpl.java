@@ -44,5 +44,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO findMemberOne(MemberDTO member) {
 		return memberMapper.findMemberOne(member);
 	}
-
-}
+	
+	@Override
+	public int checkIdDuple(MemberDTO member) {
+		return memberMapper.checkIdDuple(member);
+	}
+}	

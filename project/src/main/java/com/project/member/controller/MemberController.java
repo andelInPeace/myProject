@@ -3,14 +3,12 @@ package com.project.member.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,23 +39,24 @@ public class MemberController {
 	}
 	
 	// 회원가입 버튼 누를 때 
-	@PostMapping(value="/register")
+	@ResponseBody
+	@PostMapping(value="/register", consumes="application/json")
 	public String register(@RequestBody MemberDTO memberDTO) {
+		System.out.println("좀 되라 ...");
 		log.info("좀되라 ... ");
 		
-		MemberDTO member = memberService.loginMember(memberDTO);
-		if(member != null) {
-			log.info("중복된 아이디");
+		int member = memberService.checkIdDuple(memberDTO);
+		if(member != 0) {
+			System.out.println("중복된 아이디");
 			return "idDuple";
-		}
-		
-		log.info("/register : " + memberDTO);
-		memberService.register(memberDTO);
-		return "success";
+		} 
+			System.out.println("/register : " + memberDTO);
+			memberService.register(memberDTO);
+			return "success";
 		
 		//rttr.addFlashAttribute("result", "success");
 		
-//		return "redirect:/member/register";
+		//return "redirect:/member/register";
 	}
 
 	

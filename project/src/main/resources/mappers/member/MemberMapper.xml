@@ -18,7 +18,7 @@
 		SELECT *
 		FROM TBL_MEMBER WHERE USER_NO = #{user_no}
 	</select>
-	
+
 	<select id="selectMemberAll" resultType="MemberDTO">
 			SELECT /*+ INDEX_DESC(TBL_MEMBER) */ 
 			*
@@ -29,9 +29,13 @@
 		SELECT *
 		FROM TBL_MEMBER 
 		WHERE ID = #{id} 
-		<if test="pw != null and pw != ''">
-			AND PW = #{pw}
-		</if>
+	</select>
+	
+	<!-- 회원 가입시  -->
+	<select id="checkIdDuple" resultType="int">
+		SELECT COUNT(1)
+		FROM TBL_MEMBER 
+		WHERE ID = #{id} 
 	</select>
 	
 	<update id="updateMember">

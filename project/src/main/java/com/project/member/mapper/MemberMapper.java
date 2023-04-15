@@ -15,5 +15,7 @@ public interface MemberMapper {
 	public int delete(Long no); 
 	// 로그인으로 회원 찾기 
 	public MemberDTO findMemberOne(MemberDTO member);
+	//회원가입시 아이디 
+	public int checkIdDuple(MemberDTO memberDTO);
 	
 }

@@ -156,22 +156,25 @@
             				}
                 		
                 		$.ajax({
-            				url: "/member/register",
+            				url: '/member/register',
             				processData: false,
             				contentType: "application/json; charset=utf-8",
             				data: JSON.stringify(param),
             				type: "post",
-            				dataType: "json",
+            				/* dataType: "json", */
             				success: function(result){
-            					alert(result);
+            					console.log(result);
             					if(result == "idDuple"){
             						alert("중복된 ID 입니다.");
             						return;
             					}else{
             						alert("가입을 축하드립니다 𖤐 ");
             						location.href = "/";    						
-            					}    					
-            				}
+            					} 
+            				},
+                			error:function(error){
+                			console.log("error: ", error);
+                		}
             			});
             		}
             	

@@ -45,5 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO loginMember(MemberDTO member) {
 		return memberDAO.findMemberOne(member);
 	}
+	
+	@Override
+	public int checkIdDuple(MemberDTO member) {
+		return memberDAO.checkIdDuple(member);
+	}
 
 }

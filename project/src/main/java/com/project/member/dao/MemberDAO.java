@@ -15,5 +15,6 @@ public interface MemberDAO {
 	public boolean removeMember(Long no);
 	public List<MemberDTO> findMemberAll();
 	public MemberDTO findMemberOne(MemberDTO member);
+	public int checkIdDuple(MemberDTO member);
 
 }

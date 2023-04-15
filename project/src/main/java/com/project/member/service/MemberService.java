@@ -22,5 +22,7 @@ public interface MemberService {
 	// 로그인 시 회원 조회 
 	public MemberDTO loginMember(MemberDTO memberDTO);
 	
-	// 
+	// 회원가입시 아이디 중복 확인 
+	public int checkIdDuple(MemberDTO memberDTO);
+	
 }
