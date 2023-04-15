@@ -3,7 +3,7 @@
 <configuration>
 	
 	<typeAliases>
-		<typeAlias type="com.project.member.vo" alias="MemberDTO"/>
+		<typeAlias type="com.project.member.vo.MemberDTO" alias="MemberDTO"/>
 	</typeAliases>
 	
 </configuration>
