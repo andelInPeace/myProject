@@ -41,11 +41,13 @@ public class MemberController {
 	}
 	
 	// 회원가입 버튼 누를 때 
-	@PostMapping(value="/register", consumes="application/json")
-	public String register(MemberDTO memberDTO) {
+	@PostMapping(value="/register")
+	public String register(@RequestBody MemberDTO memberDTO) {
+		log.info("좀되라 ... ");
 		
 		MemberDTO member = memberService.loginMember(memberDTO);
 		if(member != null) {
+			log.info("중복된 아이디");
 			return "idDuple";
 		}
 		

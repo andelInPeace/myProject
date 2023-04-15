@@ -147,14 +147,19 @@
             			alert('check your password!');
             		}else{
             			
-            			var params = decodeURIComponent($("#contactForm").serialize());
-                		console.log(params);
+            			var param = { 
+            					name : $("#name").val(),
+            					id : $("#id").val(),
+            					pw : $("#pw").val(),
+            					email : $("#email").val(),
+            					phone : $("#phone").val()
+            				}
                 		
                 		$.ajax({
-            				url: '/member/register',
+            				url: "/member/register",
             				processData: false,
             				contentType: "application/json; charset=utf-8",
-            				data: params,
+            				data: JSON.stringify(param),
             				type: "post",
             				dataType: "json",
             				success: function(result){
