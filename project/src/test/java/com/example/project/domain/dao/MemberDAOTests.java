@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.example.project.domain.vo.MemberDTO;
+import com.project.member.dao.MemberDAO;
+import com.project.member.vo.MemberDTO;
 
 import lombok.extern.log4j.Log4j;
 
