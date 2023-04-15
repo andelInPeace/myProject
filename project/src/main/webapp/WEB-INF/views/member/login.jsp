@@ -44,13 +44,13 @@
 	                        <form method="POST" action="/member/login" id="logInForm">
 	                            <!--id input-->
 	                            <div class="form-floating mb-3">
-	                                <input class="form-control" id="id"  type="text" name="id" placeholder="Enter your name..." data-sb-validations="required" />
+	                                <input class="form-control" id="id"  type="text" name="id" placeholder="Enter your name..." required />
 	                                <label for="id">ID</label>
 	                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
 	                            </div>
 	                             <!--pw input-->
 	                             <div class="form-floating mb-3">
-	                                <input class="form-control" id="ow"  type="text" name="pw" placeholder="Enter your name..." data-sb-validations="required" />
+	                                <input class="form-control" id="pw"  type="password" name="pw" placeholder="Enter your name..." required />
 	                                <label for="id">Password</label>
 	                                <div class="invalid-feedback" data-sb-feedback="name:required">Password is required.</div>
 	                            </div>

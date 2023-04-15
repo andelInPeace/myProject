@@ -30,7 +30,11 @@
 	
 	<select id="findMemberOne" resultType="MemberDTO">
 		SELECT *
-		FROM TBL_MEMBER WHERE ID = #{id} AND PW = #{pw}
+		FROM TBL_MEMBER 
+		WHERE ID = #{id} 
+		<if test="pw != null and pw != ''">
+			AND PW = #{pw}
+		</if>
 	</select>
 	
 	<update id="updateMember">

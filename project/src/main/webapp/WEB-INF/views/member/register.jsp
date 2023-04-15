@@ -41,7 +41,7 @@
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form method="post" action="/member/register" id="contactForm" class="needs-validation" novalidate>
+                        <form method="post" id="contactForm" class="needs-validation" novalidate>
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name..." required/>
@@ -54,10 +54,15 @@
                                 <div class="invalid-feedback"> ID가 필요해요!!</div>
                             </div>
                              <div class="form-floating mb-3">
-                                <input class="form-control" name="pw" id="pw" type="text" placeholder="Enter your pw..." required />
+                                <input class="form-control" name="pw" id="pw" type="password" placeholder="Enter your pw..." required />
                                 <label for="pw" for="pw" class="form-label">Password</label>
                                 <div class="invalid-feedback"> 비번이 필요해요!!</div>
-                            </div>
+                            </div> 
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="pw_check" type="password" placeholder="Enter your pw..." required />
+                                <label for="pw" for="pw" class="form-label">Password Confirm</label>
+                                <div class="invalid-feedback"> 비번을 확인해주세요!!</div>
+                            </div>   
                             <!-- Email address input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="email" id="email" type="email" placeholder="name@example.com" required />
@@ -129,10 +134,45 @@
         	    })
         	})()
         	
-        	// 데이터가 들어오면 나타나게 하고 싶음 ... 
-        	$("#submitButton").click(function(){
-        		alert("가입을 축하드립니다 𖤐 ");
+        	
+        	// 
+
+        	
+        	$("#submitButton").click(function(e){
+        		e.preventDefault();
+        		if($('#pw').val() != $('#pw_check').val()){
+        			alert('check your password!');
+        		}else{
+        			sendData();
+        		}
+        	
         	});
+        	
+        	function sendData(){
+        		var params = decodeURIComponent($("#contactForm").serialize());
+        		console.log(params);
+        		
+        		$.ajax({
+    				url: '/member/register',
+    				processData: false,
+    				contentType: "application/json; charset=utf-8",
+    				data: JSON.stringify(params),
+    				type: "post",
+    				dataType: "json",
+    				success: function(result){
+    					alert(result);
+    					if(result == "idDuple"){
+    						alert("중복된 ID 입니다.");
+    						return;
+    					}else{
+    						alert("가입을 축하드립니다 𖤐 ");
+    						location.href = "/";    						
+    					}    					
+    				}
+    			});
+        	}
+        	
+        
         	
         </script>
 

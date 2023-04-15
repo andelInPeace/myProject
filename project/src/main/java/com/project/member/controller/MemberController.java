@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.member.service.MemberService;
@@ -38,14 +41,22 @@ public class MemberController {
 	
 	
 	//가입 완료 버튼 누르면 이동 
-	@PostMapping("/register")
-	public String register(MemberDTO memberDTO, RedirectAttributes rttr) {
+	@ResponseBody
+	@PostMapping(value="/register")
+	public String register(@RequestBody MemberDTO memberDTO) {
+		
+		MemberDTO member = memberService.loginMember(memberDTO);
+		if(member != null) {
+			return "idDuple";
+		}
+		
 		log.info("/register : " + memberDTO);
 		memberService.register(memberDTO);
+		return "success";
 		
-		rttr.addFlashAttribute("result", "success");
+		//rttr.addFlashAttribute("result", "success");
 		
-		return "redirect:/member/register";
+//		return "redirect:/member/register";
 	}
 	
 	// 회원 정보 불러오기 
@@ -102,7 +113,7 @@ public class MemberController {
 	
 	// 회원 가입 페이지로 이동 
 	@GetMapping("/register")
-	public String register() {
+	public String register1() {
 		log.info("해보자");
 		
 		return "/member/register";

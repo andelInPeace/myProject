@@ -21,4 +21,6 @@ public interface MemberService {
 	public List<MemberDTO> findMemberAll();
 	// 로그인 시 회원 조회 
 	public MemberDTO loginMember(MemberDTO memberDTO);
+	
+	// 
 }

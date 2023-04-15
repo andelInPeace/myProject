@@ -1,11 +1,24 @@
 package com.project.member.vo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Component
-@Data
+@JsonAutoDetect
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class MemberDTO {
 	
 	private Long user_no;
