@@ -107,7 +107,7 @@
 		 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+       <!--  <script src="js/scripts.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
        
         
@@ -138,43 +138,50 @@
         	// 
 
         	
-        	$("#submitButton").click(function(e){
-        		e.preventDefault();
-        		if($('#pw').val() != $('#pw_check').val()){
-        			alert('check your password!');
-        		}else{
-        			sendData();
-        		}
         	
+        	
+        	$(document).ready(function(e){
+        		$("#submitButton").click(function(e){
+            		e.preventDefault();
+            		if($('#pw').val() != $('#pw_check').val()){
+            			alert('check your password!');
+            		}else{
+            			
+            			var params = decodeURIComponent($("#contactForm").serialize());
+                		console.log(params);
+                		
+                		$.ajax({
+            				url: '/member/register',
+            				processData: false,
+            				contentType: "application/json; charset=utf-8",
+            				data: params,
+            				type: "post",
+            				dataType: "json",
+            				success: function(result){
+            					alert(result);
+            					if(result == "idDuple"){
+            						alert("중복된 ID 입니다.");
+            						return;
+            					}else{
+            						alert("가입을 축하드립니다 𖤐 ");
+            						location.href = "/";    						
+            					}    					
+            				}
+            			});
+            		}
+            	
+            	});
+        		
+        		
         	});
         	
-        	function sendData(){
-        		var params = decodeURIComponent($("#contactForm").serialize());
-        		console.log(params);
-        		
-        		$.ajax({
-    				url: '/member/register',
-    				processData: false,
-    				contentType: "application/json; charset=utf-8",
-    				data: JSON.stringify(params),
-    				type: "post",
-    				dataType: "json",
-    				success: function(result){
-    					alert(result);
-    					if(result == "idDuple"){
-    						alert("중복된 ID 입니다.");
-    						return;
-    					}else{
-    						alert("가입을 축하드립니다 𖤐 ");
-    						location.href = "/";    						
-    					}    					
-    				}
-    			});
-        	}
         	
         
         	
         </script>
+        
+        <script th:src="@{/js/jquery-3.6.0.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/jquery.serialize-object.min.js}"></script>
 
 </body>
 </html>

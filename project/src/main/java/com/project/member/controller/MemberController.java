@@ -3,6 +3,7 @@ package com.project.member.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,11 +40,9 @@ public class MemberController {
 		log.info("들어오고있니 .... ");
 	}
 	
-	
-	//가입 완료 버튼 누르면 이동 
-	@ResponseBody
-	@PostMapping(value="/register")
-	public String register(@RequestBody MemberDTO memberDTO) {
+	// 회원가입 버튼 누를 때 
+	@PostMapping(value="/register", consumes="application/json")
+	public String register(MemberDTO memberDTO) {
 		
 		MemberDTO member = memberService.loginMember(memberDTO);
 		if(member != null) {
@@ -58,6 +57,7 @@ public class MemberController {
 		
 //		return "redirect:/member/register";
 	}
+
 	
 	// 회원 정보 불러오기 
 //	@GetMapping("/view")

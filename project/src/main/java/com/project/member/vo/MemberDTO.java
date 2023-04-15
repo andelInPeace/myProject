@@ -16,7 +16,7 @@ import lombok.Setter;
 @Component
 @JsonAutoDetect
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class MemberDTO {
