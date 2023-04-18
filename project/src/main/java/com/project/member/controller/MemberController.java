@@ -234,5 +234,10 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+//	@GetMapping("/list01")
+//	public String list01() {
+//		return "/board/list";
+//	}
 }
 

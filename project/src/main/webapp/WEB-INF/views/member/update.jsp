@@ -126,12 +126,13 @@
         		$("#submitButton").click(function(e){
             		e.preventDefault();
             		if($('#pw').val() != $('#pw_check').val()){
-            			alert('check your password!');
+            			alert('비밀번호를 다시 확인해주세요!!');
             			return;
             		}else{
             			$.post("/member/update", $("#contactForm").serialize(), 
             					function(date){
             					alert('회원 정보가 수정되었습니다 :)');
+            					location.href = "/member/viewmember"; 
             			});
             		}	
             			/* var param = { 

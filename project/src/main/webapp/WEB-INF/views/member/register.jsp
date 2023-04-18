@@ -78,22 +78,7 @@
                             </div>
                             
                    			<button class="btn btn-primary btn-xl" id="submitButton" type="submit">가입신청</button>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                         <!--  <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">가입 신청이 완료되었습니다!</div>
-                                    <br />
-                                </div>
-                            </div> -->
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                           <!--  <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div> -->
-                            <!-- Submit Button-->
+                           
                             
                         </form>
                     </div>

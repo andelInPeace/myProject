@@ -31,6 +31,11 @@
     	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
 	</definition>
+	
+	<definition name="/board/list" template="/WEB-INF/views/board/list.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
+	</definition>
 		
 		
 	<!-- 타일즈 미 적용 -->
