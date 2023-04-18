@@ -20,8 +20,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO viewMemberOne(Long no) {
-		return memberDAO.viewMemberOne(no);
+	public MemberDTO viewMemberOne(MemberDTO member) {
+		return memberDAO.viewMemberOne(member);
 	}
 
 	@Override

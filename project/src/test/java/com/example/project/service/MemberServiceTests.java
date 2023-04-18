@@ -77,23 +77,23 @@ public class MemberServiceTests {
 //		}
 //	}
 //	
-	@Before
-	public void removeTest() {
-		MemberDTO member = memberService.viewMemberOne(5L);
-		if(member==null) {
-			log.info("NO MEMBER");
-			return;
-		}
-		if(memberService.removeMember(member.getUser_no())) {
-			log.info("=========================");
-			log.info("DELETE SUCCESS");
-			log.info("=========================");
-		} else {
-			log.info("=========================");
-			log.info("DELETE FAILURE");
-			log.info("=========================");
-		}
-	}
+//	@Before
+//	public void removeTest() {
+//		MemberDTO member = memberService.viewMemberOne(5L);
+//		if(member==null) {
+//			log.info("NO MEMBER");
+//			return;
+//		}
+//		if(memberService.removeMember(member.getUser_no())) {
+//			log.info("=========================");
+//			log.info("DELETE SUCCESS");
+//			log.info("=========================");
+//		} else {
+//			log.info("=========================");
+//			log.info("DELETE FAILURE");
+//			log.info("=========================");
+//		}
+//	}
 	
 	@Test
 	public void memberList() {

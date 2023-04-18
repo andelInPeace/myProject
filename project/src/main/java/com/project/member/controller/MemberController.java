@@ -1,9 +1,12 @@
 package com.project.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,29 +70,129 @@ public class MemberController {
 //		model.addAttribute("member", memberService.viewMemberOne(user_no));
 //	}
 	
+	// 로그인 클릭시 
+	@ResponseBody
+	@PostMapping("/login")
+	public String login(@RequestBody MemberDTO memberDTO, HttpSession session) {
+		System.out.println("=============================");
+		System.out.println("/member ID : " + memberDTO.getId());
+		System.out.println("/member PW : " + memberDTO.getPw());
+		System.out.println("=============================");
+		
+		MemberDTO loginMember = memberService.loginMember(memberDTO);
+		
+//		if(loginMember == null){
+//			throw new Exception("아이디와 비밀번호가 일치하지 않습니다.");
+//		};
+		
+		if(loginMember !=null) {
+			System.out.println(loginMember);
+			//인증 성공, 로그인 처리
+			// 로그인시 member 객체 전달 
+			session.setAttribute("user", loginMember);
+			return "loginOK";
+			
+		} else {
+			System.out.println("NO MEMBER..........");
+			return "loginFail";
+		}
+		
+	}
 	
-	// 회원 정보 조회 (수정 위한 조회도)
-	@GetMapping({"/findMember", "/update"})
-	public void findMember(Long user_no, HttpServletRequest request, Model model) {
+	// 회원 정보 조회
+	@GetMapping({"/viewmember"})
+	public String findMember(MemberDTO memberDTO, HttpServletRequest request, Model model, HttpSession session) {
+		
+		// 회원 번호가 필요함
+		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
+		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
+	
 		//사용자가 요청한 Url(/findmember? /updqte?)이 뭔지를 알아야 하는데 
 		// 이 url 정보는 Request 에 담겨 있음 (상수가 아닌 변수로 담을 것)
 		String url = request.getRequestURI();
 		// url 에서 마지막 부분 /FINDMEMBER 냐 /update 냐 를 알아야 함 
-		log.info("=============================");
-		log.info(url.substring(url.lastIndexOf("/")) + " : " + user_no);
-		log.info("=============================");
+		System.out.println("=============================");
+		System.out.println(url.substring(url.lastIndexOf("/")) + " : " + viewMember.getId());
+		System.out.println("=============================");
 		
-		model.addAttribute("member", memberService.viewMemberOne(user_no));
+		model.addAttribute("member", memberService.viewMemberOne(viewMember));
+		
+		return "/member/viewmember";
 		
 	}
 	
+	// 회원 정보 수정페이지로 이동 
+	@GetMapping({"/update"})
+	public String updatedMember(MemberDTO memberDTO, HttpServletRequest request, Model model, HttpSession session) {
+		
+		// 회원 번호가 필요함
+		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
+		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
 	
+		//사용자가 요청한 Url(/findmember? /updqte?)이 뭔지를 알아야 하는데 
+		// 이 url 정보는 Request 에 담겨 있음 (상수가 아닌 변수로 담을 것)
+		String url = request.getRequestURI();
+		// url 에서 마지막 부분 /FINDMEMBER 냐 /update 냐 를 알아야 함 
+		System.out.println("=============================");
+		System.out.println(url.substring(url.lastIndexOf("/")) + " : " + viewMember.getId());
+		System.out.println("=============================");
+		
+		model.addAttribute("member", memberService.viewMemberOne(viewMember));
+		
+		return "/member/update";
+		
+	}
+	
+	//회원 정보 수정 버튼 누르면 이동 
+	@Transactional(rollbackFor = Exception.class) 
+	@PostMapping("/update")
+	public String update(MemberDTO memberDTO, HttpSession session, RedirectAttributes rttr) {
+				
+		// 수정이 된 memberDTO 받음 
+		System.out.println("=============================");
+		System.out.println("/updateMember : " + memberDTO);
+		System.out.println("=============================");
+		if(memberService.updateMember(memberDTO)) {
+			
+			MemberDTO updateMember = memberService.viewMemberOne(memberDTO);
+			rttr.addFlashAttribute("result", "success");
+			session.setAttribute("user", updateMember);
+			System.out.println(updateMember);	
+		} 
+		return "redirect:/member/viewmember";
+	}
+		
+	
+	// 회원 정보 
+//	@GetMapping({"/viewmember", "/update"})
+//	public void findMember(MemberDTO memberDTO, HttpServletRequest request, Model model, HttpSession session) {
+//		
+//		// 회원 번호가 필요함
+//		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
+//		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
+//	
+//		//사용자가 요청한 Url(/findmember? /updqte?)이 뭔지를 알아야 하는데 
+//		// 이 url 정보는 Request 에 담겨 있음 (상수가 아닌 변수로 담을 것)
+//		String url = request.getRequestURI();
+//		// url 에서 마지막 부분 /FINDMEMBER 냐 /update 냐 를 알아야 함 
+//		System.out.println("=============================");
+//		System.out.println(url.substring(url.lastIndexOf("/")) + " : " + viewMember.getId());
+//		System.out.println("=============================");
+//		
+//		model.addAttribute("member", memberService.viewMemberOne(viewMember));
+//		
+//	}
+//	
 	// 회원 정보 삭제 
 	@GetMapping("/remove")
-	public String remove(Long user_no, RedirectAttributes rttr) {
-		log.info("=============================");
-		log.info("/removeMember : " + user_no);
-		log.info("=============================");
+	public String remove(MemberDTO memberDTO, RedirectAttributes rttr, HttpSession session) {
+		
+		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
+		Long user_no = viewMember.getUser_no();
+		
+		System.out.println("=============================");
+		System.out.println("/removeMember : " + user_no);
+		System.out.println("=============================");
 		
 		
 		if(memberService.removeMember(user_no)) {
@@ -98,19 +201,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//회원 정보 수정 완료 버튼 누르면 이동 
-	@PostMapping("/update")
-	public String update(MemberDTO memberDTO, RedirectAttributes rttr) {
-		// 수정이 된 memberDTO 받음 
-		log.info("=============================");
-		log.info("/updateMember : " + memberDTO);
-		log.info("=============================");
-		if(memberService.updateMember(memberDTO)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		
-		return "redirect:/";
-	}
+
 	
 	// 회원 가입 페이지로 이동 
 	@GetMapping("/register")
@@ -135,25 +226,13 @@ public class MemberController {
 		return "/member/login";
 	}
 	
-	// 로그인 클릭시 
-	@PostMapping("/login")
-	public String login(MemberDTO memberDTO, RedirectAttributes rttr) {
-		log.info("=============================");
-		log.info("/member ID : " + memberDTO.getId());
-		log.info("/member PW : " + memberDTO.getPw());
-		log.info("=============================");
-		
-		
-		if(memberService.loginMember(memberDTO) !=null) {
-			log.info(memberService.loginMember(memberDTO));
-			rttr.addFlashAttribute("result", "success");
-			return "redirect:/";
-			
-		} else {
-			log.info("NO MEMBER..........");
-		}
-		return "/member/login";
-		
+
+	
+	//로그아웃 시
+	@GetMapping("/logOut")
+	public String logOut(HttpSession session, RedirectAttributes rttr) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }
 

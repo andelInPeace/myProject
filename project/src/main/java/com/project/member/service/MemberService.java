@@ -12,7 +12,7 @@ public interface MemberService {
 	// 회원 등록 
 	public void register(MemberDTO memberDTO);
 	// 특정 회원 정보 가져오기 
-	public MemberDTO viewMemberOne(Long no);
+	public MemberDTO viewMemberOne(MemberDTO memberDTO);
 	//특정 회원 수정 
 	public boolean updateMember(MemberDTO memberDTO);
 	//특정 회원 삭제 

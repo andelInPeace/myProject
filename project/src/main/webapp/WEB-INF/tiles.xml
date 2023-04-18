@@ -17,7 +17,7 @@
     	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
 	</definition>
 	
-	<definition name="/member/view" template="/WEB-INF/views/member/view.jsp">
+	<definition name="/member/viewmember" template="/WEB-INF/views/member/viewmember.jsp">
     	<put-attribute name="header" value="/WEB-INF/views/tpl/header.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/tpl/footer.jsp"/>  
 	</definition>

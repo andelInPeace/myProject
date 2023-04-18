@@ -20,8 +20,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberDTO viewMemberOne(Long no) {
-		return memberMapper.selectMemberOne(no);
+	public MemberDTO viewMemberOne(MemberDTO member) {
+		return memberMapper.selectMemberOne(member);
 	}
 
 	@Override

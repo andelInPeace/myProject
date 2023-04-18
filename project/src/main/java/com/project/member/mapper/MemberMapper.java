@@ -10,7 +10,9 @@ import com.project.member.vo.MemberDTO;
 public interface MemberMapper {
 	public void insertMember(MemberDTO member);
 	public List<MemberDTO> selectMemberAll();
-	public MemberDTO selectMemberOne(Long no);
+	// 회원 정보 조회 
+	public MemberDTO selectMemberOne(MemberDTO member);
+	// 회원 정보 수정 
 	public int updateMember(MemberDTO member);
 	public int delete(Long no); 
 	// 로그인으로 회원 찾기 

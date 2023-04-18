@@ -71,13 +71,45 @@
 		 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         
          <script>
-        	$("#submitButton").click(function(){
-        		alert(" 𖤐 환영합니다 𖤐 ");
-        	});
+         
+         $(document).ready(function(e){
+        	 
+        	 $("#submitButton").click(function(e){
+        		 e.preventDefault();
+        		 
+        		var param = {
+        				id : $('#id').val(),
+        				pw : $("#pw").val(),
+        			}
+        		
+        		$.ajax({
+    				url: '/member/login',
+    				processData: false,
+    				contentType: "application/json; charset=utf-8",
+    				data: JSON.stringify(param),
+    				type: "post",
+    				/* dataType: "json", */
+    				success: function(result){
+    					console.log(result);
+    					if(result == "loginOK"){
+    						alert(" 𖤐 환영합니다 𖤐 ");
+    						location.href = "/";
+    					}else{
+    						alert(" 잘못된 정보 입니다 ");
+    						return;    						
+    					}  
+    				},
+        			error:function(error, msg){
+        			console.log("error: ", error, msg);
+        			}
+    			});
+        		
+        	 });
+         });
+
         </script>
 
 </body>

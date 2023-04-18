@@ -39,11 +39,11 @@ public class MemberMapperTests {
 //		log.info(memberDTO);
 //	}
 	
-	@Test
-	public void selectMemberOne() {
-		MemberDTO memberDTO = memberMapper.selectMemberOne(2L);
-		log.info(memberDTO);
-	}
+//	@Test
+//	public void selectMemberOne() {
+//		MemberDTO memberDTO = memberMapper.selectMemberOne(2L);
+//		log.info(memberDTO);
+//	}
 	
 //	@Test
 //	public void selectMembeAll() {

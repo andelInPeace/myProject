@@ -17,8 +17,7 @@ import lombok.Setter;
 @JsonAutoDetect
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class MemberDTO {
 	
 	private Long user_no;
@@ -30,6 +29,6 @@ public class MemberDTO {
 	private String regDate;
 	private String updateDate;
 	private String admin;
-	
+
 
 }
