@@ -14,7 +14,8 @@ public interface MemberMapper {
 	public MemberDTO selectMemberOne(MemberDTO member);
 	// 회원 정보 수정 
 	public int updateMember(MemberDTO member);
-	public int delete(Long no); 
+	// 회원 정보 삭제 
+	public int delete(String id); 
 	// 로그인으로 회원 찾기 
 	public MemberDTO findMemberOne(MemberDTO member);
 	//회원가입시 아이디 

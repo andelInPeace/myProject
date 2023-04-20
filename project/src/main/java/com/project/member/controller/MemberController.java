@@ -188,15 +188,16 @@ public class MemberController {
 	public String remove(MemberDTO memberDTO, RedirectAttributes rttr, HttpSession session) {
 		
 		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
-		Long user_no = viewMember.getUser_no();
+		String removeID = viewMember.getId();
 		
 		System.out.println("=============================");
-		System.out.println("/removeMember : " + user_no);
+		System.out.println("/removeMember : " +removeID);
 		System.out.println("=============================");
 		
 		
-		if(memberService.removeMember(user_no)) {
+		if(memberService.removeMember(removeID)) {
 			rttr.addFlashAttribute("result", "success");
+			session.invalidate();
 		}	
 		return "redirect:/";
 	}

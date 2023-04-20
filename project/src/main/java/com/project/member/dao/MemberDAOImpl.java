@@ -31,8 +31,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public boolean removeMember(Long no) {
-		return memberMapper.delete(no) !=0;
+	public boolean removeMember(String id) {
+		return memberMapper.delete(id) !=0;
 	}
 
 	@Override

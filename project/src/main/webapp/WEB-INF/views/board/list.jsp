@@ -49,13 +49,18 @@
 						      <th scope="col">제목</th>
 						      <th scope="col">작성자</th>
 						      <th scope="col">작성일</th>
+						      <th scope="col">수정일</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr>
+						  	<c:forEach var="board" items="${boardList}">
+						  	<!-- val 은 선언 해 준거고 Items 가 전달 받은 서   -->
+						  	</c:forEach>
+						    <tr>				
 						      <th scope="row">1</th>
 						      <td>Mark</td>
 						      <td>Otto</td>
+						      <td>@mdo</td>
 						      <td>@mdo</td>
 						    </tr>
 						  </tbody>

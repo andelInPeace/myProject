@@ -4,6 +4,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.project.member.vo.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.project.board.vo.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
 </configuration>

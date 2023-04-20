@@ -32,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean removeMember(Long no) {
-		return memberDAO.removeMember(no);
+	public boolean removeMember(String id) {
+		return memberDAO.removeMember(id);
 	}
 
 	@Override

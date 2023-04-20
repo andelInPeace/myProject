@@ -15,7 +15,9 @@ public interface MemberDAO {
 	public MemberDTO viewMemberOne(MemberDTO member);
 	// 회원 정보 수정 
 	public boolean updateMember(MemberDTO member);
-	public boolean removeMember(Long no);
+	// 회원 정보 삭제 
+	public boolean removeMember(String id);
+	
 	public List<MemberDTO> findMemberAll();
 	// 로그인 
 	public MemberDTO findMemberOne(MemberDTO member);

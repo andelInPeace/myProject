@@ -16,7 +16,7 @@ public interface MemberService {
 	//특정 회원 수정 
 	public boolean updateMember(MemberDTO memberDTO);
 	//특정 회원 삭제 
-	public boolean removeMember(Long no);
+	public boolean removeMember(String id);
 	//전체 회원 조회 
 	public List<MemberDTO> findMemberAll();
 	// 로그인 시 회원 조회 
