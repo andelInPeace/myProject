@@ -1,6 +1,7 @@
 package com.project.board.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.board.service.BoardService;
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
+import com.project.board.vo.pageDTO;
+import com.project.member.vo.MemberDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -35,17 +39,19 @@ public class BoardController {
 	
 	// 전체 게시글 조회 
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Criteria criteria, Model model) {
 		log.info("list..............");
-		model.addAttribute("boardList", boardService.getList()); 
+		model.addAttribute("boardList", boardService.getList(criteria)); 
+		model.addAttribute("pageDTO", new pageDTO(boardService.getTotal(), criteria));
 		return "/board/list";
 	}
 	
 	// 게시글 입력 
 	@PostMapping("/register")
-	public String register(BoardVO boardVO, RedirectAttributes rttr) {
+	public String register(MemberDTO memberDTO, BoardVO boardVO, RedirectAttributes rttr) {
 		log.info("/register : " + boardVO);
 		boardService.register(boardVO);
+		
 		
 		// flash 라는 영역은 Session 에 생기고, redirect 로 전송할 때 request 영역에 초기화 된다 
 		// 초기화 되기 전에 FLash 영역에 데이터를 저장해놓고, 초기화된 후 flash 영역에서 데이터를 가지고 온다 
@@ -56,12 +62,20 @@ public class BoardController {
 	
 	// 게시글 조회  // 게시글 '수정하기' 버튼 눌렀을 때 
 	@GetMapping({"/read","/modify"})
-	public void read(Long bno, HttpServletRequest request, Model model) {
+	public void read(Long bno, HttpServletRequest request, HttpSession session, Model model) {
 		// 요청 들어온 Url 추출 
 		String url = request.getRequestURI();
+		String realUrl = url.substring(url.lastIndexOf("/")); 
 		// url 중 / 뒷 부분 출력 
 		log.info(url.substring(url.lastIndexOf("/")) + " : " + bno);
-		model.addAttribute("board", boardService.get(bno));
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("user");
+		
+		if(memberDTO != null) {
+			model.addAttribute("userId", memberDTO.getId());
+			model.addAttribute("board", boardService.get(bno));
+			return;
+		}
+			model.addAttribute("board", boardService.get(bno));
 	}
 	
 	// 게시글 삭제 
@@ -91,6 +105,10 @@ public class BoardController {
 	
 	// 메인 화면에서 게시글 등록을 눌렀을 때 
 	@GetMapping("/register")
-	public void register() {}
-
+	public String register(HttpSession session, Model model) {
+		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
+		model.addAttribute("user_id", viewMember.getId());
+		return "/board/register";
+	}
+	
 }

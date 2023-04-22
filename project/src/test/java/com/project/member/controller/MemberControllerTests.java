@@ -1,4 +1,4 @@
-package com.project.controller;
+package com.project.member.controller;
 
 import org.junit.Before;
 import org.junit.Test;

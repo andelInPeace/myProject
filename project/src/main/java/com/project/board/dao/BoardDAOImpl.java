@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.board.mapper.BoardMapper;
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -38,8 +39,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		return boardMapper.getList();
+	public List<BoardVO> getList(Criteria criteria) {
+		return boardMapper.getList(criteria);
+	}
+	
+	@Override
+	public int getTotal() {
+		return boardMapper.getTotal();
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -64,22 +65,22 @@ public class BoardServicetests {
 //		log.info("=======================");
 //	}
 	
-	@Test
-	public void removeTest() {
-		BoardVO board = boardService.get(4L);
-		if(board == null) { log.info("NO BOARD"); return;}
-		
-		if(boardService.remove(board.getBno())){
-			log.info("UPDATE SUCCESS");
-			log.info("=======================");
-			return;
-		}
-		log.info("UPDATE FAILURE");
-		log.info("=======================");
-	}
-	
 //	@Test
-//	public void getListTest() {
-//		boardService.getList().forEach(log::info);
+//	public void removeTest() {
+//		BoardVO board = boardService.get(4L);
+//		if(board == null) { log.info("NO BOARD"); return;}
+//		
+//		if(boardService.remove(board.getBno())){
+//			log.info("UPDATE SUCCESS");
+//			log.info("=======================");
+//			return;
+//		}
+//		log.info("UPDATE FAILURE");
+//		log.info("=======================");
 //	}
+	
+	@Test
+	public void getListTest() {
+		boardService.getList(new Criteria()).forEach(log::info);
+	}
 }

@@ -19,6 +19,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
     </head>
 	<body>
 
@@ -44,4 +45,10 @@
 		<tiles:insertAttribute name="footer"> </tiles:insertAttribute>
 	
 	</body>
+	
+		<!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <!--  <script src="js/scripts.js"></script> -->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>

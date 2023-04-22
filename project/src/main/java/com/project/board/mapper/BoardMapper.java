@@ -4,11 +4,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 @Mapper
 public interface BoardMapper {
 	// 전체 리스트 조회 
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(Criteria critera);
 	// 게시글 추가 
 	public void insert(BoardVO board);
 	// 게시글(하나) 조회 ( 게시글 하나의 정보를 가져올 거기 때문에 모델 객체(BoardVO)를 담아야 함 )
@@ -17,4 +18,6 @@ public interface BoardMapper {
 	public int delete(Long bno);
 	// 게시글 수정 (수정 완료된 boardVO 객체를 받는다)
 	public int update(BoardVO board);
+	//게시글 전체 수 
+	public int getTotal();
 }

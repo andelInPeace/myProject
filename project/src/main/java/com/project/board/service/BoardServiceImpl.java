@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.board.dao.BoardDAO; 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,8 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<BoardVO> getList() {
-		return boardDAO.getList();
+	public List<BoardVO> getList(Criteria criteria) {
+		return boardDAO.getList(criteria);
 	}
 
 	@Override
@@ -40,6 +41,11 @@ public class BoardServiceImpl implements BoardService {
 	public boolean modify(BoardVO board) {
 		return boardDAO.modify(board);
 		
+	}
+	
+	@Override
+	public int getTotal() {
+		return boardDAO.getTotal();
 	}
 
 }

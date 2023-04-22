@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.project.board.vo.Criteria;
+
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,10 +34,13 @@ public class BoardControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
-//	@Test
-//	public void listTest() throws Exception{
-//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")).andReturn().getModelAndView().getModelMap());
-//	}
+	@Test
+	public void listTest() throws Exception{
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+				.param("pageNum", "14")
+				.param("amount", "10")
+				).andReturn().getModelAndView().getModelMap());
+	}
 	
 //	@Test
 //	public void registerTest() throws Exception {
@@ -46,7 +51,7 @@ public class BoardControllerTests {
 //				.param("secret", "0")
 //				).andReturn().getFlashMap());
 //	}
-	
+//	
 //	@Test
 //	public void readTest() throws Exception {
 //		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/read")

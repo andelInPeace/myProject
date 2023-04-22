@@ -3,8 +3,22 @@
 <mapper namespace="com.project.board.mapper.BoardMapper">
 
 	<select id="getList" resultType="boardVO">
-		SELECT * 
-		FROM TBL_BOARD
+		SELECT BNO, TITLE, CONTENT, USER_ID, REGDATE, UPDATEDATE, SECRET 
+		FROM
+		(	
+			SELECT  /*+ INDEX_DESC(TBL_BOARD) */ 
+			ROWNUM RN, BNO, TITLE, CONTENT, USER_ID, REGDATE, UPDATEDATE, SECRET 
+			FROM TBL_BOARD 
+			<![CDATA[	
+			WHERE ROWNUM <= ${pageNum} * #{amount}
+			]]>	
+		)
+			<!-- where 절이 먼저 되기 때문에 where 절에서 rn 을 쓸 수 없음 -->
+			<!-- 해당 페이지 마지막 게시글 번호   -->
+		<![CDATA[	
+		WHERE RN > (#{pageNum}-1) * #{amount} 
+		]]>
+		<!-- 해당 페이지 시작 번호  -->
 	</select>
 
 	<insert id="insert" parameterType="boardVO">
@@ -13,7 +27,7 @@
 		SELECT NVL(MAX(BNO),0)+1 FROM TBL_BOARD
 	</selectKey>
 		INSERT INTO TBL_BOARD(BNO, TITLE, CONTENT, USER_ID, SECRET)
-		VALUES(  #{bno}
+		VALUES( #{bno}
 				, #{title}
 				, #{content}
 				, #{user_id}
@@ -39,5 +53,9 @@
 			, SECRET =#{secret}
 		WHERE BNO = #{bno}
 	</update>
+	
+	<select id="getTotal" resultType="_int">
+		SELECT COUNT(BNO) FROM TBL_BOARD
+	</select>
 	
 </mapper>

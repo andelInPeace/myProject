@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -60,6 +61,7 @@ public class boardDAOTests {
 	
 	@Test
 	public void getList() {
-		boardDAO.getList().forEach(log::info);
+		boardDAO.getList(new Criteria()).forEach(log::info);
+		// 기본 생성자 호출 
 	}
 }
