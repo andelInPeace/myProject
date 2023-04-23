@@ -153,9 +153,9 @@
 									</div>
 								</div>
 								<div class="field registerButtons" style="text-align: center">
-									<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list'"/>
+									<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list${criteria.params}'"/>
 									<c:if test="${userId eq board.user_id}">
-										<input type="button" id="modifyButton" class="btn btn-primary finish"  value="수정" onclick="location.href='/board/modify?bno=${board.bno}'"/> 
+										<input type="button" id="modifyButton" class="btn btn-primary finish"  value="수정" onclick="location.href='/board/modify${criteria.params}&bno=${board.bno}'"/> 
 										<input type="submit" class="btn btn-primary finish"  value="삭제"/> 
 									</c:if>
 										<!-- <a href="/board/list" class="btn btn-primary finish">이전</a> -->

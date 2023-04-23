@@ -62,7 +62,7 @@ public class BoardController {
 	
 	// 게시글 조회  // 게시글 '수정하기' 버튼 눌렀을 때 
 	@GetMapping({"/read","/modify"})
-	public void read(Long bno, HttpServletRequest request, HttpSession session, Model model) {
+	public void read(Criteria criteria, Long bno, HttpServletRequest request, HttpSession session, Model model) {
 		// 요청 들어온 Url 추출 
 		String url = request.getRequestURI();
 		String realUrl = url.substring(url.lastIndexOf("/")); 
@@ -92,14 +92,18 @@ public class BoardController {
 	
 	// 게시글 수정 
 	@PostMapping("/modify")
-	public String modify(BoardVO boardVO, RedirectAttributes rttr) {
+	public String modify(Criteria criteria, BoardVO boardVO, RedirectAttributes rttr) {
 		// 수정된 BoardVO 받음 
 		
 		log.info("/modify : " + boardVO);
 		
 		if(boardService.modify(boardVO)) {
+			// 화면으로 전달 
 			rttr.addFlashAttribute("result", "success");
 		}
+	 
+		// 쿼리 스트링으로 전달 : Get 방식으로 쓸 때 
+		rttr.addAttribute("pageNum", criteria.getPageNum());
 		return "redirect:/board/list";
 	}
 	

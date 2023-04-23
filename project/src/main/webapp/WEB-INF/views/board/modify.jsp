@@ -23,64 +23,59 @@
 		
 		<style>
 			body{}
-			 #submitButton, #deleteButton {
+			  #submitButton, #deleteButton {
 			 	 display: inline-block;
 			 	 /* float: left; */
 				 margin: 0 auto;
 				 padding: 0.8rem 1.5rem; 
 	
 			} 
-			
-			.readform {}
-			form {
-			margin: 0 0 2rem 0;
+			input:focus{outline: none;}
+			textarea.container:focus{outline: none;}
+			#bno {
+				display:inline-block;
+				text-align: left;
+				font-size: 1.4rem;
 			}
-
-			form > :last-child {
-				margin-bottom: 0;
-			}
+			h4 {
+				display: inline-block;
+				color: #0B4274 ;
+				font-size: 1.2rem;
+				width: 80px;
+			}	
 	
 			form > .fields {
-				/* display: -moz-flex;
-				display: -webkit-flex;
-				display: -ms-flex;
-				display: flex;
-				-moz-flex-wrap: wrap;
-				-webkit-flex-wrap: wrap;
-				-ms-flex-wrap: wrap;
-				flex-wrap: wrap; */
+				text-align: left;
+				padding: 
+			}
+			form > .fields > .field {
+				padding: 1.5rem 0 0 4rem;
+				width: calc(100% - 1.5rem);
+				boarder: 1px solid #043C73;
+				display:flex; 
+				align-items:center;
+			}
+
+			form > .fields {
 				width: calc(100% + 3rem);
 				margin: -1.5rem 0 2rem -1.5rem;
 				
 			}
-
-			form > .fields > .field {
-				/* -moz-flex-grow: 0;
-				-webkit-flex-grow: 0;
-				-ms-flex-grow: 0;
-				flex-grow: 0;
-				-moz-flex-shrink: 0;
-				-webkit-flex-shrink: 0;
-				-ms-flex-shrink: 0;
-				flex-shrink: 0; */
-				padding: 1.5rem 0 0 1.5rem;
-				width: calc(100% - 1.5rem);
+	 	 	 textarea.container {
+				display: inline-block;
+				width: 80%;
+				border: 1.5px solid #DCEBEC;
+				/* padding-left:0 10px; */
+			}  
+			.container {
+				display: inline-block;
+				width: 80%;
 			}
-
-			form > .fields > .field.half {
-				width: calc(50% - 0.75rem);
+			input.container {
+				border: 1.5px solid #DCEBEC;
+				padding: 8px;
+				margin-left: 0;
 			}
-
-			form > .fields > .field.third {
-				width: calc(100%/3 - 0.5rem);
-			}
-
-			form > .fields > .field.quarter {
-				width: calc(25% - 0.375rem);
-			} 
-			h4 {
-			display: inline-block;
-			color: gray;}
 		</style>
     </head>
 	<body>
@@ -104,39 +99,34 @@
                     <div class="col-lg-8 col-xl-7"> -->
                       
           
-						
-						<div class="readform">
 							<form method="post" action="/board/modify" id="registForm" name="registForm">
+								<input type="hidden" name="pageNum" value="${criteria.pageNum}">
 								<div class="fields">
 									<div class="field">
 										<h4>번호</h4>
-										<br>
-										<input type="text" name="bno" value="${board.bno}" readonly />
+										<input type="text" class="container" name="bno" value="${board.bno}" readonly />
 							 		</div>
 									<div class="field">
 										<h4>* 제목</h4>
-										<br>
-										<input type="text" name="title" value="${board.title}" />
+										<input type="text" class="container" name="title" value="${board.title}" />
 							 		</div>
-									<div class="field">
+									<div class="field" style="display:flex; align-items:center;">
 										<h4>* 내용</h4>
-										<br>
-										<textarea name="content" rows="6" placeholder="Content" style="resize:none">${board.content}</textarea>
+										<textarea name="content" class="container" rows="6" placeholder="Content" style="resize:none; margin-left:0;">${board.content}</textarea>
 									</div>
 									<div class="field">
 										<h4>작성자</h4>
 										<br>
-										<input type="text" name="user_id" value="${board.user_id}" readonly/>
+										<input type="text" class="container" name="user_id" value="${board.user_id}" readonly/>
 									</div>
 									<input type="hidden" name="secret" value="0"/>
 								</div>
 								<div class="field registerButtons" style="text-align: center">
-									<input type="button" class="btn btn-primary finish"  value="목룍" onclick="location.href='/board/list'"/>
+									<input type="button" class="btn btn-primary finish"  value="목룍보기" onclick="location.href='/board/list${criteria.params}'"/>
 									<input type="submit" class="btn btn-primary finish" value="수정완료"/> 
 								</div>
 							</form>
 						</div>
-					</div>
                             
                          <!-- <a href="/board/register"><button class="btn btn-primary" id="submitButton" type="submit">게시글 등록</button></a> -->
                         

@@ -154,10 +154,9 @@
 							</form>
 						</div>
 					</div>
-                            
-                         <!-- <a href="/board/register"><button class="btn btn-primary" id="submitButton" type="submit">게시글 등록</button></a> -->
+                       
                         
-     <!--                </div>
+                    <!-- </div>
                 </div>
             </div> -->
         </section>

@@ -29,6 +29,8 @@
 				line-height: 2.4375rem;
 				padding: 0 1.5rem; */
 				/* } */
+				.small-width{display: none;}
+				.big-width {display:block;}
 				#submitButton {
 					display : inline-block;
 					margin: 10px auto;
@@ -46,8 +48,18 @@
 				}
 				@media(max-width: 860px){
 					body{transform: scale(1); over-flow-x:hidden;}
+					.big-width {display:none;}
+					.small-width {display: block;}
 					.regDate {display: none;}
 					.updateDate{display: none;}
+				}
+				code {
+					border-radius: 2px;
+					border: 1px solid #DCEBEC;
+					font-family: "Courier New", monospace;
+					font-size: 0.8rem;
+					margin: 0 0.2rem;
+					padding: 0.2rem 0.6rem;
 				}
 		</style>
     </head>
@@ -89,7 +101,7 @@
 						  	<!-- val 은 선언 해 준거고 Items 가 전달 받은 서   -->
 						  		<tr class="tBody">
 						  			<td class="bno">${board.bno}</td>
-						  			<td class="title"><a href="/board/read?bno=${board.bno}">${board.title}</a></td>
+						  			<td class="title"><a href="/board/read${pageDTO.criteria.params}&bno=${board.bno}">${board.title}</a></td>
 						  			<td class="user_id">${board.user_id}</td>
 						  			<td class="regDate">${board.regDate}</td>
 						  			<td class="updateDate">${board.updateDate}</td>
@@ -97,7 +109,8 @@
 						  	</c:forEach>
 						  </tbody>
 					</table>
-					<div style="margin: 10px auto;">
+					
+					<div style="margin: 10px auto; text-align: center;" class="big-width">
 						
 						<c:if test="${pageDTO.prev}">
 							<a class="changePage" href="${pageDTO.startPage-1}"><code>&lt;</code></a>
@@ -118,6 +131,20 @@
 							<a class="changePage" href="${pageDTO.endPage+1}"><code>&gt;</code></a>
 						</c:if>
 					</div>
+					<!-- 휴대폰 페이지 -->
+					<div style="text-align: center;" class="small-width">
+						<!-- 이전 페이지  -->
+						<c:if test="${pageDTO.criteria.pageNum > 1}">
+							<a class="changePage" href="${pageDTO.criteria.pageNum - 1}"><code>&lt;</code></a>
+						</c:if>
+						<!-- 현재 페이지만 나오면 돼서 반복문 필요 없음 -->
+						<code><c:out value="${pageDTO.criteria.pageNum}"></c:out></code>
+						<!-- 다음 페이지  -->
+						<c:if test="${pageDTO.realEnd > pageDTO.criteria.pageNum}">
+							<a class="changePage" href="${pageDTO.criteria.pageNum + 1}"><code>&gt;</code></a>
+						</c:if>
+					</div>
+					
 					<form name="pageForm" action="/board/list">
 						<input type="hidden" name="pageNum" value="${pageDTO.criteria.pageNum}">
 					</form>
