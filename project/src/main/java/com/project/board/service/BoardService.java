@@ -19,6 +19,6 @@ public interface BoardService {
 	// 게시글 수정 
 	public boolean modify(BoardVO board);
 	//전체 게시글 수 
-	public int getTotal();
+	public int getTotal(Criteria criteria);
 
 }

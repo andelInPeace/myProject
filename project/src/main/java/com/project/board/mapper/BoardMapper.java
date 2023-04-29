@@ -19,5 +19,5 @@ public interface BoardMapper {
 	// 게시글 수정 (수정 완료된 boardVO 객체를 받는다)
 	public int update(BoardVO board);
 	//게시글 전체 수 
-	public int getTotal();
+	public int getTotal(Criteria criteria);
 }

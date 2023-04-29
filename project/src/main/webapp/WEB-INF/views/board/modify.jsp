@@ -43,6 +43,12 @@
 				font-size: 1.2rem;
 				width: 80px;
 			}	
+			h5 {
+				display: inline-block;
+				color: #0B4274;
+				font-size: 1rem;
+				margin-bottom: 0;
+			}	
 	
 			form > .fields {
 				text-align: left;
@@ -59,7 +65,6 @@
 			form > .fields {
 				width: calc(100% + 3rem);
 				margin: -1.5rem 0 2rem -1.5rem;
-				
 			}
 	 	 	 textarea.container {
 				display: inline-block;
@@ -101,30 +106,49 @@
           
 							<form method="post" action="/board/modify" id="registForm" name="registForm">
 								<input type="hidden" name="pageNum" value="${criteria.pageNum}">
+								<input type="hidden" name="keyword" value="${criteria.keyword}">
+								<input type="hidden" name="type" value="${criteria.type}">
 								<div class="fields">
-									<div class="field">
-										<h4>번호</h4>
-										<input type="text" class="container" name="bno" value="${board.bno}" readonly />
-							 		</div>
+									<!-- 등록일 때 -->
+									<c:if test="${board.register ne 1}">
+										<div class="field">
+											<h4>번호</h4>
+											<input type="text" class="container" name="bno" value="${board.bno}" readonly />
+								 		</div>
+							 		</c:if>
 									<div class="field">
 										<h4>* 제목</h4>
 										<input type="text" class="container" name="title" value="${board.title}" />
 							 		</div>
 									<div class="field" style="display:flex; align-items:center;">
 										<h4>* 내용</h4>
-										<textarea name="content" class="container" rows="6" placeholder="Content" style="resize:none; margin-left:0;">${board.content}</textarea>
+										<textarea name="content" class="container" rows="8" placeholder="Content" style="resize:none; margin-left:0;">${board.content}</textarea>
 									</div>
+								
+									 <div class="field" id="secret" style="display:flex;  align-items:center;">
+	   									<h5>*비밀글</h5>
+	   									<input id="secret" type="checkbox" name="secret" value="${board.secret}" style="display: inline-block; margin-left: 30px;" />
+									</div>
+								
 									<div class="field">
 										<h4>작성자</h4>
 										<br>
 										<input type="text" class="container" name="user_id" value="${board.user_id}" readonly/>
 									</div>
-									<input type="hidden" name="secret" value="0"/>
+								     <input type="hidden" name="register" value="${board.register}" />
 								</div>
-								<div class="field registerButtons" style="text-align: center">
-									<input type="button" class="btn btn-primary finish"  value="목룍보기" onclick="location.href='/board/list${criteria.params}'"/>
-									<input type="submit" class="btn btn-primary finish" value="수정완료"/> 
-								</div>
+								<c:if test="${board.register eq 1}">
+									<div class="field registerButtons" style="text-align: center">
+										<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list'"/>
+										<input type="submit" class="btn btn-primary finish" value="등록"/> 
+									</div>
+								</c:if>
+								<c:if test="${board.register ne 1}">
+									<div class="field registerButtons" style="text-align: center">
+										<input type="button" class="btn btn-primary finish"  value="목룍보기" onclick="location.href='/board/list${criteria.params}'"/>
+										<input type="submit" class="btn btn-primary finish" value="수정완료"/> 
+									</div>
+								</c:if>	
 							</form>
 						</div>
                             
@@ -144,3 +168,29 @@
         <!-- Core theme JS-->
        <!--  <script src="js/scripts.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
+        <script>
+        
+        	$(document).ready(function(){
+        		let secretVal = $('input:checkbox[name="secret"]').val();
+        		console.log(secretVal);
+        		
+        		if(secretVal == '1'){
+    				$('input:checkbox[name="secret"]').attr("checked",true);
+    			}
+        		
+        		
+        		$('input[type=checkbox][name=secret]').change(function() {
+        	        if ($(this).is(':checked')) {
+        	        	$('input:checkbox[name="secret"]').val(1);
+        	        }else {
+        	        	$('input:checkbox[name="secret"]').val(0);
+        	        }
+        	    });
+        		
+        	})
+			
+			
+			
+
+        </script>

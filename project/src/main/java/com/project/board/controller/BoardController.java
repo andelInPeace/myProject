@@ -39,10 +39,17 @@ public class BoardController {
 	
 	// 전체 게시글 조회 
 	@GetMapping("/list")
-	public String list(Criteria criteria, Model model) {
+	public String list(Criteria criteria, Model model, HttpSession session) {
 		log.info("list..............");
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("user");	
+		
 		model.addAttribute("boardList", boardService.getList(criteria)); 
-		model.addAttribute("pageDTO", new pageDTO(boardService.getTotal(), criteria));
+		model.addAttribute("pageDTO", new pageDTO(boardService.getTotal(criteria), criteria));
+		
+		if(memberDTO != null) {
+			model.addAttribute("user", memberDTO);
+		} 
 		return "/board/list";
 	}
 	
@@ -97,22 +104,48 @@ public class BoardController {
 		
 		log.info("/modify : " + boardVO);
 		
-		if(boardService.modify(boardVO)) {
-			// 화면으로 전달 
-			rttr.addFlashAttribute("result", "success");
+		if(boardVO.getRegister() == 1) {
+			boardService.register(boardVO);
+			
+			
+			// flash 라는 영역은 Session 에 생기고, redirect 로 전송할 때 request 영역에 초기화 된다 
+			// 초기화 되기 전에 FLash 영역에 데이터를 저장해놓고, 초기화된 후 flash 영역에서 데이터를 가지고 온다 
+			// 데이터를 가져왔다면 FLASH  영역에 있던 데이터는 없어진다. 
+			rttr.addFlashAttribute("bno", boardVO.getBno());
+			return "redirect:/board/list";
+		}else {
+			if(boardService.modify(boardVO)) {
+				// 화면으로 전달 
+				rttr.addFlashAttribute("result", "success");
+			}
+		 
+			// 쿼리 스트링으로 전달 : Get 방식으로 쓸 때 
+			//rttr.addAttribute("pageNum", criteria.getPageNum());
+			//rttr.addAttribute("type", criteria.getType());
+			//rttr.addAttribute("keyword", criteria.getKeyword());
+			// 근데 위에 잘 작동 안 될 경우, reutrn 주소에 직접 파라미터들을입력하는 식으 할 수 있음 
+			return "redirect:/board/list" + criteria.getParams();
 		}
-	 
-		// 쿼리 스트링으로 전달 : Get 방식으로 쓸 때 
-		rttr.addAttribute("pageNum", criteria.getPageNum());
-		return "redirect:/board/list";
+		
+		
 	}
 	
 	// 메인 화면에서 게시글 등록을 눌렀을 때 
 	@GetMapping("/register")
-	public String register(HttpSession session, Model model) {
+	public String register(HttpSession session, Model model, Criteria criteria) {
+		
 		MemberDTO viewMember = (MemberDTO)session.getAttribute("user");
 		model.addAttribute("user_id", viewMember.getId());
-		return "/board/register";
+		
+		BoardVO board = new BoardVO();
+		board.setRegister(1);
+		board.setUser_id(viewMember.getId());
+		model.addAttribute("board", board);
+		
+//		criteria = new Criteria();
+//		criteria.setPageNum(1);
+
+		return "/board/modify";
 	}
 	
 }

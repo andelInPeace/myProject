@@ -40,6 +40,12 @@
 				color: #0B4274 ;
 				font-size: 1.2rem;
 				width: 80px;
+			}
+			h5 {
+				display: inline-block;
+				color: #0B4274;
+				font-size: 1rem;
+				margin-bottom: 0;
 			}	
 	
 			form > .fields {
@@ -134,18 +140,21 @@
 								<div class="fields">
 									
 									<div class="field" id="title">
-										 <h4>*제목</h4> 
+										 <h4>제목</h4> 
 										<input id="title" class="container" name="title" placeholder="Title" type="text" />
 							 		</div>
 									<div class="field" style="display:flex;  align-items:center;">
-											<h4>*내용</h4>
+											<h4>내용</h4>
 										<textarea class="container" name="content" rows="8" placeholder="Content" style="resize:none; margin-left:0;">${board.content}</textarea>
+									</div>
+									<div class="field" id="secret" style="display:flex;  align-items:center;">
+   										<h5>*비밀글</h5>
+   										<input id="secret" type="checkbox" name="secret" value="1" style="display: inline-block; margin-left: 30px;" />
 									</div>
 									<div class="field">
 										<h4>작성자</h4>
 										<input class="container" name="user_id" value="${user_id}" type="text" readonly/>
 									</div>
-									<input type="hidden" name="secret" value="0"/>
 								</div>
 								<div class="field registerButtons" style="text-align: center">
 										<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list'"/>

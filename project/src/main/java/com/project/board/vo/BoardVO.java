@@ -13,6 +13,7 @@ public class BoardVO {
 	private String user_id;
 	private String regDate;
 	private String updateDate;
-	private String secret;
+	private int secret;
+	private int register;
 
 }
