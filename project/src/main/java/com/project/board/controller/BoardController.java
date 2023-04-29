@@ -140,6 +140,7 @@ public class BoardController {
 		BoardVO board = new BoardVO();
 		board.setRegister(1);
 		board.setUser_id(viewMember.getId());
+		board.setName(viewMember.getName());
 		model.addAttribute("board", board);
 		
 //		criteria = new Criteria();

@@ -64,7 +64,7 @@
 					, #{content}
 					, #{user_id}
 					<!-- , #{secret}) -->
-					, CASE WHEN  #{secret} = 1 THEN '1' ELSE '0' END
+					, NVL(#{secret},0)
 					)
 	</insert>
 	
