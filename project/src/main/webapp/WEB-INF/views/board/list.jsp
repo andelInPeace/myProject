@@ -241,7 +241,7 @@
 					</form>
                     
                           <c:if test="${!empty user}">
-                        	 <a href="/board/register"><button class="btn btn-primary" id="submitButton" type="submit">게시글 등록</button></a>
+                        	 <a href="/board/register${criteria.params}"><button class="btn btn-primary" id="submitButton" type="submit">게시글 등록</button></a>
                           </c:if>
                           <c:if test="${empty user}">
                           	<div id="notice">* 게시글은 가입 회원만 작성 가능합니다 *</div>

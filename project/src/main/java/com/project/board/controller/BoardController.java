@@ -72,7 +72,7 @@ public class BoardController {
 	public void read(Criteria criteria, Long bno, HttpServletRequest request, HttpSession session, Model model) {
 		// 요청 들어온 Url 추출 
 		String url = request.getRequestURI();
-		String realUrl = url.substring(url.lastIndexOf("/")); 
+		//String realUrl = url.substring(url.lastIndexOf("/")); 
 		// url 중 / 뒷 부분 출력 
 		log.info(url.substring(url.lastIndexOf("/")) + " : " + bno);
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("user");
@@ -82,7 +82,7 @@ public class BoardController {
 			model.addAttribute("board", boardService.get(bno));
 			return;
 		}
-			model.addAttribute("board", boardService.get(bno));
+		model.addAttribute("board", boardService.get(bno));
 	}
 	
 	// 게시글 삭제 
