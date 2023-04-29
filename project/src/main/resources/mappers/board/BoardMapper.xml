@@ -26,13 +26,15 @@
 		</if>
 	</sql>
 	<select id="getList" resultType="boardVO">
-		SELECT  BNO
-    		  , TITLE
-		      , CONTENT		
-		      , USER_ID
-		      , TO_CHAR(REGDATE,'YYYY-MM-DD HH24:MI') AS REGDATE
-		      , TO_CHAR(UPDATEDATE,'YYYY-MM-DD HH24:MI') AS UPDATEDATE
-		      , SECRET
+		SELECT  TB.BNO
+    		  , TB.TITLE
+		      , TB.CONTENT		
+		      , CASE WHEN TM.LEFT = '1' THEN RPAD(SUBSTR(TB.USER_ID,1,1),LENGTH(TB.USER_ID),'*')
+		     						 ELSE USER_ID
+		     	END AS USER_ID
+		      , TO_CHAR(TB.REGDATE,'YYYY-MM-DD HH24:MI') AS REGDATE
+		      , TO_CHAR(TB.UPDATEDATE,'YYYY-MM-DD HH24:MI') AS UPDATEDATE
+		      , TB.SECRET
 		FROM
 		(	
 			SELECT  /*+ INDEX_DESC(TBL_BOARD) */ 
@@ -42,11 +44,11 @@
 		<![CDATA[	
 			 ROWNUM <= ${pageNum} * #{amount}
 		]]>	
-		)
+		) TB JOIN TBL_MEMBER TM ON TB.USER_ID = TM.ID
 			<!-- where 절이 먼저 되기 때문에 where 절에서 rn 을 쓸 수 없음 -->
 			<!-- 해당 페이지 마지막 게시글 번호   -->
 		<![CDATA[	
-		WHERE RN > (#{pageNum}-1) * #{amount} 
+		WHERE TB.RN > (#{pageNum}-1) * #{amount} 
 		]]>
 		<!-- 해당 페이지 시작 번호  -->
 	</select>
@@ -68,8 +70,18 @@
 	
 	<select id="read" parameterType="long" resultType="boardVO">
 	<!-- parameter 는 생략 가능 :Mapper 에서 연결된 걸로 가져옴   -->
-		SELECT * FROM TBL_BOARD
-		WHERE BNO = #{bno}
+		SELECT TB.BNO
+		     , TB.TITLE
+		     , TB.CONTENT
+		     , CASE WHEN TM.LEFT = '1' THEN RPAD(SUBSTR(TB.USER_ID,1,1),LENGTH(TB.USER_ID),'*')
+		     						   ELSE TB.USER_ID
+		     		END AS USER_ID
+		     , TB.REGDATE
+		     , TB.UPDATEDATE
+		     , TB.SECRET
+		     , CASE WHEN TM.LEFT = '1' THEN '(탈퇴한 회원)' ELSE TM.NAME END AS NAME
+		FROM TBL_BOARD TB JOIN TBL_MEMBER TM ON TB.USER_ID = TM.ID
+		WHERE TB.BNO = #{bno}
 	</select>
 		
 	<delete id="delete">

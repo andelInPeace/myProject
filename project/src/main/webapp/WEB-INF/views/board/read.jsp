@@ -151,6 +151,10 @@
 										<h4>작성자</h4>
 										<input class="container" type="text" name="writer" value="${board.user_id}" readonly/>
 									</div>
+									<div class="field">
+										<h4>이름</h4>
+										<input class="container" type="text" name="name" value="${board.name}" readonly/>
+									</div>
 								</div>
 								<div class="field registerButtons" style="text-align: center">
 									<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list${criteria.params}'"/>

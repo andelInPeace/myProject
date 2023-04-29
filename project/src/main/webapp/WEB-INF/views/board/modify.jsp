@@ -135,6 +135,10 @@
 										<br>
 										<input type="text" class="container" name="user_id" value="${board.user_id}" readonly/>
 									</div>
+									<div class="field">
+										<h4>이름</h4>
+										<input class="container" type="text" name="name" value="${board.name}" readonly/>
+									</div>									
 								     <input type="hidden" name="register" value="${board.register}" />
 								</div>
 								<c:if test="${board.register eq 1}">
