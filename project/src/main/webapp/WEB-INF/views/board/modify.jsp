@@ -104,7 +104,7 @@
                     <div class="col-lg-8 col-xl-7"> -->
                       
           
-							<form method="post" action="/board/modify" id="registForm" name="registForm">
+							<form method="post" id="registForm" name="registForm">
 								<input type="hidden" name="pageNum" value="${criteria.pageNum}">
 								<input type="hidden" name="keyword" value="${criteria.keyword}">
 								<input type="hidden" name="type" value="${criteria.type}">
@@ -139,14 +139,14 @@
 								</div>
 								<c:if test="${board.register eq 1}">
 									<div class="field registerButtons" style="text-align: center">
-										<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list'"/>
+										<input type="button" class="btn btn-primary finish"  value="이전" onclick="location.href='/board/list${criteria.params}'"/>
 										<input type="submit" class="btn btn-primary finish" value="등록"/> 
 									</div>
 								</c:if>
 								<c:if test="${board.register ne 1}">
 									<div class="field registerButtons" style="text-align: center">
 										<input type="button" class="btn btn-primary finish"  value="목룍보기" onclick="location.href='/board/list${criteria.params}'"/>
-										<input type="submit" class="btn btn-primary finish" value="수정완료"/> 
+										<input type="submit" class="btn btn-primary finish" value="수정완료" /> 
 									</div>
 								</c:if>	
 							</form>
@@ -187,6 +187,7 @@
         	        	$('input:checkbox[name="secret"]').val(0);
         	        }
         	    });
+        		
         		
         	})
 			
