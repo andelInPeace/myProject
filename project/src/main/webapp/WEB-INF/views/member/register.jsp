@@ -50,7 +50,7 @@
                             </div>
                              <div class="form-floating mb-3">
                                 <input class="form-control" name="id" id="id" type="text" placeholder="Enter your name..." required />
-                                <label for="id" for="id" class="form-label">ID</label>
+                                <label for="id" id="id" class="form-label">ID</label>
                                 <div class="invalid-feedback"> ID가 필요해요!!</div>
                             </div>
                              <div class="form-floating mb-3">
@@ -66,18 +66,17 @@
                             <!-- Email address input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="email" id="email" type="email" placeholder="name@example.com" required />
-                                <label for="email" id="email" class="form-label">Email address</label>
+                                <label for="email" id="email" class="form-label">Email(email@example.com)</label>
                                 <div class="invalid-feedback">Email가 필요해요!!</div>
-                                <div class="invalid-feedback">Email이 유효하지 않아요...</div>
                             </div>
                             <!-- Phone number input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="phone" id="phone" type="tel" placeholder="(123) 456-7890" required />
-                                <label for="phone" id="phone" class="form-label">Phone number</label>
+                                <label for="phone" id="phone" class="form-label">Phone number(010-0000-0000)</label>
                                 <div class="invalid-feedback">연락처가 필요해요 !!</div>
                             </div>
                             
-                   			<button class="btn btn-primary btn-xl" id="submitButton" type="submit">가입신청</button>
+                   			<button class="btn btn-primary btn-xl" id="submit" type="submit">가입신청</button>
                            
                             
                         </form>
@@ -94,35 +93,34 @@
         <!-- Core theme JS-->
        <!--  <script src="js/scripts.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-       
+       	<script src="/resources/js/scripts.js"></script>
+
         
         <script>
         	
-        	// Example starter JavaScript for disabling form submissions if there are invalid fields
-        	(function () {
-        	  'use strict'
-
-        	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        	  var forms = document.querySelectorAll('.needs-validation')
-
-        	  // Loop over them and prevent submission
-        	  Array.prototype.slice.call(forms)
-        	    .forEach(function (form) {
-        	      form.addEventListener('submit', function (event) {
-        	        if (!form.checkValidity()) {
-        	          event.preventDefault()
-        	          event.stopPropagation()
-        	        }
-
-        	        form.classList.add('was-validated')
-        	      }, false)
-        	    })
-        	})()
+	     // Example starter JavaScript for disabling form submissions if there are invalid fields
+	        (function () {
+	          'use strict'
+	
+	          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	          var forms = document.querySelectorAll('.needs-validation');
+	
+	          // Loop over them and prevent submission
+	          Array.prototype.slice.call(forms)
+	            .forEach(function (form) {
+	              form.addEventListener('submit', function(event) {
+	                if (!form.checkValidity()) {
+	                  event.preventDefault()
+	                  event.stopPropagation()
+	                }
+	
+	                form.classList.add('was-validated')
+	              }, false)
+	            })
+	        })()
         	
         	
         	// 
-
-        	
         	
         	
         	$(document).ready(function(e){
@@ -167,13 +165,9 @@
         		
         		
         	});
-        	
-        	
         
-        	
+ 	
         </script>
-        
-     
 
 </body>
 </html>

@@ -109,7 +109,7 @@
 								<input type="hidden" name="keyword" value="${criteria.keyword}">
 								<input type="hidden" name="type" value="${criteria.type}">
 								<div class="fields">
-									<!-- 등록일 때 -->
+									<!-- 등록이 아닐 때 -->
 									<c:if test="${board.register ne 1}">
 										<div class="field">
 											<h4>번호</h4>
@@ -164,14 +164,15 @@
         </section>
       </header>
 		
-			<%-- <tiles:insertAttribute name="footer"> </tiles:insertAttribute> --%>
-			<jsp:include page="/WEB-INF/views/tpl/footer.jsp"/>
+	   <%-- <tiles:insertAttribute name="footer"> </tiles:insertAttribute> --%>
+	   <jsp:include page="/WEB-INF/views/tpl/footer.jsp"/>
 			
-		 <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+	   <!-- Bootstrap core JS-->
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+       <!-- Core theme JS-->
        <!--  <script src="js/scripts.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="/resources/assets/js/reply.js"></script>
         
         <script>
         
@@ -195,7 +196,5 @@
         		
         	})
 			
-			
-			
-
+        	
         </script>

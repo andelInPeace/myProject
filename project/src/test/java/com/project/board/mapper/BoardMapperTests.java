@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -18,10 +19,10 @@ public class BoardMapperTests {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-//	@Test
-//	public void getListTest() {
-//		boardMapper.getList().forEach(log::info);
-//	}
+	@Test
+	public void getListTest(Criteria criteria) {
+		boardMapper.getList(criteria).forEach(log::info);
+	}
 	
 //	@Test
 //	public void insertTest() {
@@ -53,17 +54,17 @@ public class BoardMapperTests {
 //		log.info("NO BOARD");
 //	}
 	
-	@Test
-	public void updateTest() {
-		BoardVO board = boardMapper.read(3L);
-		if(board !=null) {
-			board.setTitle("오류없는세상");
-			board.setContent("꿈꾼다");
-			board.setUser_id("nabi01");
-			board.setSecret("0");
-			log.info("UPDATE COUNT : " + boardMapper.update(board));
-			return;
-		}
-		log.info("NO BOARD");
-	}
+//	@Test
+//	public void updateTest() {
+//		BoardVO board = boardMapper.read(3L);
+//		if(board !=null) {
+//			board.setTitle("오류없는세상");
+//			board.setContent("꿈꾼다");
+//			board.setUser_id("nabi01");
+//			board.setSecret("0");
+//			log.info("UPDATE COUNT : " + boardMapper.update(board));
+//			return;
+//		}
+//		log.info("NO BOARD");
+//	}
 }

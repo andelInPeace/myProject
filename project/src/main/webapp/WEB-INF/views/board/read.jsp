@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>게시글 작성</title>
+        <title>게시글 보기</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -43,6 +43,13 @@
 				font-size: 1.2rem;
 				width: 80px;
 			}	
+			h5 {
+				font-size: 15px;
+                color: #1369ba;
+                display: block;
+                text-align: left;
+   				/* margin-left: 62px */
+            }
 	
 			form > .fields {
 				text-align: left;
@@ -51,7 +58,7 @@
 			form > .fields > .field {
 				padding: 1.5rem 0 0 4rem;
 				width: calc(100% - 1.5rem);
-				boarder: 1px solid #043C73;
+				/* border: 1px solid ; */
 				display:flex; 
 				align-items:center;
 			}
@@ -61,50 +68,112 @@
 				margin: -1.5rem 0 2rem -1.5rem;
 				
 			}
+			
+			.container {
+				display: inline-block;
+				width: 80%;
+			}
 	 	 	textarea.container {
 				display: inline-block;
 				width: 80%;
 				border: 1.5px solid #DCEBEC;
 				padding-left:0 10px;
 			} 
-			.container {
-				display: inline-block;
-				width: 80%;
-			}
+			
 			input.container {
 				border: 1.5px solid #DCEBEC;
 				padding: 8px;
 				margin-left: 0;
-				/* border-left-width: 0; 
-			   	border-right-width: 0;
-			   	border-top-width: 0; 
-			   	border-bottom-width: 0; */
-			   	/* 1 solid #0EC9D5 */
 			}
-		
-			/* form {
-				margin: 0 0 2rem 0;
-			}
-	
-	
 			
+		
+			
+			.reply-container {
+				display: inline-block;
+				width: 100%;
+				border: 1px solid #DCEBEC;
+				text-align: left;
+			
+			}
+			
+			ul.icons, ul.replies{
+				cursor: default;
+				list-style: none;
+				padding-left: 0;
+				color: #0B4274;
+				text-align: left;
+   			 	width: 90%;
+    			display: block;
+			}
+	
+			ul.icons li {
+				display: block;
+				padding: 0 1rem 0 0;
+				color: #0B4274;
+			}
 
-			form > .fields > .field {
-				padding: 1.5rem 0 0 1.5rem;
+			ul.icons li:last-child {
+				padding-right: 0;
+			}
+
+			ul.icons li .icon:before {
+				font-size: 1.75rem;
+			}
+			
+			div.line {
+				border-bottom: 1px solid #DCEBEC;
+				margin-top: 3px;}
+			
+			img {
+				width: 18px;
+				padding-bottom: 5px;
+				padding-right: 3px;
+			}
+			a.register{
+				display: inline-block;
+				font-size: 14px;
+   			 	width: 100%;
+			}
+			.register-form {
+				width: 80%;
+				margin: 0 auto;
+				display: flex;
+    			flex-direction: column;
+    			align-items: center;
+			}
+			.reply-b {
+				width: 50px;
+    			font-size: 12px;
+    			border: 0.8px solid;
+			}
+			.reply-f{
+				/* text-align:left;  */
+				/* padding-left:30px; */
+				padding-bottom:12px;
+				text-align: left;
+				width: 80%;
+			}
+	/* 		div.field{
+				padding: 1.5rem 0 0 4rem;
 				width: calc(100% - 1.5rem);
 				boarder: 1px solid #043C73;
-			}
-
-			form > .fields > .field.half {
-				width: calc(50% - 0.75rem);
-			}
-
-			form > .fields > .field.third {
-				width: calc(100%/3 - 0.5rem);
-			}
-
-			form > .fields > .field.quarter {
-				width: calc(25% - 0.375rem);
+				display:flex; 
+				align-items:center; 
+			}*/
+			
+			
+		/* 	textarea.container {
+			    display: inline-block;
+			    width: 80%;
+			    border: 1.5px solid #DCEBEC;
+			    padding-left: 0;
+			    margin-left: 0;
+			}   */ 
+			
+		/* 	div.register-form {
+				display: inline-block;
+				font-size: medium;
+				color: #0B4274;
 			}  */
 			
 		</style>
@@ -125,11 +194,7 @@
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Contact Section Form-->
-             <!--    <div class="row justify-content-center">
-                    <div class="col-lg-8 col-xl-7"> -->
-                     
-						
+                  			
 			
 							<form method="get" action="/board/remove" id="registForm" name="registForm">
 								<div class="fields">
@@ -166,42 +231,133 @@
 										<!-- <a href="javascript:void(0)" class="btn btn-primary finish">수정</a>
 										<a href="javascript:void(0)" class="btn btn-primary cancel">삭제</a> -->
 								</div>
+								
+								
+								<div style="display:inline-block; text-align: left; margin-bottom: 8px; margin-top: 10px;">
+									<a class="btn btn-primary medieum register">댓글 등록</a>
+								</div>
+								<ul class="icons" style="margin:0;">
+									<li style="magin-top:5px;">
+										<span class="icon solid fa-envelope"></span>
+										<strong><img src="/resources/assets/img/comment01.png">댓글</strong>
+									</li>						
+								</ul>
+								<div style="display:block; text-align:center;">
+									<div class="register-form" style="display:none;">
+										<div class="reply-f">
+											<h5>작성자</h5>
+											<input class="reply-container" name="user_id" placeholder="id" type="text">
+										</div>
+										<div class="reply-f">
+											<h5>댓글 입력</h5>
+											<textarea class="reply-container" name="reply" rows="6" placeholder="comments" style="resize:none;"></textarea>
+										</div>	
+										<div class="field registerButtons">
+											<a href="javascript:void(0)" class="btn btn-outline-primary reply-b finish">등록</a>
+											<a href="javascript:void(0)" class="btn btn-outline-primary reply-b cancel">취소</a>
+										</div>	
+									</div> <!-- register-form -->
+								</div>
+								<ul class="replies"> </ul>
 							</form>
 						</div>
 			
-                            
-                         <!-- <a href="/board/register"><button class="btn btn-primary" id="submitButton" type="submit">게시글 등록</button></a> -->
-                        
-                    <!-- </div> -->
-           <!--      </div> -->
-           <!--  </div> -->
+    
         </section>
       </header>
 		
-			<%-- <tiles:insertAttribute name="footer"> </tiles:insertAttribute> --%>
-			<jsp:include page="/WEB-INF/views/tpl/footer.jsp"/>
+		<%-- <tiles:insertAttribute name="footer"> </tiles:insertAttribute> --%>
+		<jsp:include page="/WEB-INF/views/tpl/footer.jsp"/>
 			
-		 <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        
+    </body>
+    
+       <!-- Bootstrap core JS-->
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+       <!-- Core theme JS-->
        <!--  <script src="js/scripts.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="/resources/js/reply.js"></script>
         
-<!--         <script>
-	        $(document).ready(function(e){
-	    		$("#submitButton").click(function(e){
-	        		e.preventDefault();
-	        		if($('#pw').val() != $('#pw_check').val()){
-	        			alert('비밀번호를 다시 확인해주세요!!');
-	        			return;
-	        		}else{
-	        			$.post("/member/update", $("#registForm").serialize(), 
-	        					function(date){
-	        					alert('회원 정보가 수정되었습니다 :)');
-	        					location.href = "/member/viewmember"; 
-	        			});
-	        		
-	  				}
-	          	});
-	    	});	
-        </script> -->
+        <script>
+        	let bno = "${board.bno}";
+			let page = 1;
+			
+        	const repliesUL = $("ul.replies");
+        	
+        	showList(page);
+        	
+        	function showList(page){
+        		replyService.getList({
+        			bno: bno,
+        			page: page,
+        		},function(list){
+        			let str="";
+        			let date = "";
+
+        			for(let i=0; i<list.length;i++){
+        				let check = false;
+        				check = list[i].replyDate == list[i].updateDate;
+        				date = check ? list[i].replyDate : list[i].updateDate;
+        		
+						str += `<li style="display:block;">`;
+						str += `<strong>`+ list[i].user_id +`</strong>`;
+						str += `<p style="margin-top: 5px;">`+ list[i].reply + `</p>`;
+						str += `<div style="display: block; text-align: right; font-size:small;">` + (check?"":"*") + replyService.displayTime(date) + `</div>`;
+						str += `<div class="line"></div>`;
+						str += `</li>`;
+        			}
+        			repliesUL.html(str);
+        		});
+        	}
+        	
+        	$("a.register").on("click", function(e){
+        		e.preventDefault();
+        		$("div.register-form").show();
+        		$(this).hide();
+        	});
+        	
+        	
+			/* 댓글 추가 */
+        	/*
+			replyService.add({
+        		bno : bno,
+        		reply : "모듈화 테스트.",
+        		user_id : "nabi01"
+        	}, function(result){
+        		console.log(result);
+        	});
+			*/
+			
+			/* 목록보기  */
+			/*
+			replyService.getList({bno:bno, page:2}, function(list){
+				console.log(list);
+			});
+			*/
+			
+			/* 댓글 삭제*/
+			/*
+			replyService.remove(30, function(result){
+				alert(result);
+			});
+        	*/
+        	
+        	/* 댓글 수정 */
+        	/*
+        	replyService.modify({
+        		reply: "댓글 수정 테스트.",
+        		rno: "29",
+        	}, function(result){
+        		alert(result);
+        	});
+        	*/
+        	
+        	/* 댓글 1개 조회 */
+        	/*
+        	replyService.getReply(29, function(reply){
+        		console.log(reply);
+        	});
+        	*/
+        </script>
+</html>
