@@ -43,7 +43,7 @@ public class MemberController {
 	
 	// 회원가입 버튼 누를 때 
 	@ResponseBody
-	@PostMapping(value="/register", consumes="application/json")
+	@PostMapping(value="/register", consumes="application/json", produces={MediaType.TEXT_PLAIN_VALUE})
 	public String register(@RequestBody MemberDTO memberDTO) {
 		System.out.println("좀 되라 ...");
 		log.info("좀되라 ... ");

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.board.vo.Criteria;
 import com.project.reply.service.ReplyService;
+import com.project.reply.vo.ReplyDTO;
 import com.project.reply.vo.ReplyVO;
 
 import lombok.RequiredArgsConstructor;
@@ -44,10 +45,10 @@ public class ReplyController {
 	
 	// 해당 게시글 전체 댓글 조회 
 	@GetMapping(value="/{bno}/{page}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("bno") Long bno, @PathVariable int page) {
+	public ResponseEntity<ReplyDTO> getList(@PathVariable("bno") Long bno, @PathVariable int page) {
 		// header 에 담겨서 오면 requestBody || url 에 담겨서 오면 pathVariable 
 		log.info("getList ..........: " + bno);
-		return new ResponseEntity<>(replyService.findAllByBNO(new Criteria(page, 10),bno), HttpStatus.OK);
+		return new ResponseEntity<>(new ReplyDTO(replyService.findAllByBNO(new Criteria(page, 10),bno),replyService.getTotal(bno)), HttpStatus.OK);
 	}
 	
 	// 댓글 조회 
@@ -70,7 +71,7 @@ public class ReplyController {
 	// PUT : 자원의 전체 수정, 자원 내 모든 필드를 전달해야 함 
 	// PATCH : 자원의 일부 수정, 수정할 필드만 전송 (나머지는 전달 안해도 되는 건 아니고 디폴트 값을 정해야함 
 	// 실무에선 postmapping 을 많이 씀 
-	@PutMapping(value="/{rno}", consumes="application/json", produces= {MediaType.APPLICATION_XML_VALUE})
+	@PutMapping(value="/{rno}", consumes="application/json", produces= {MediaType.TEXT_PLAIN_VALUE})
 	public String modify(@PathVariable Long rno, @RequestBody ReplyVO replyVO) {
 		replyVO.setRno(rno);
 		return replyService.modify(replyVO) ? "success" : "fail";

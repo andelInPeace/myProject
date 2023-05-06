@@ -33,9 +33,9 @@
  		let bno = param.bno;
  		let page = param.page || 1;
  		
- 		$.getJSON("/replies/" + bno + "/" + page + ".json", function(list){
+ 		$.getJSON("/replies/" + bno + "/" + page + ".json", function(result){
  			if(callback){
- 				callback(list);
+ 				callback(result);
  			}
  		}).fail(function(xhr, status, err){
  			if(error){

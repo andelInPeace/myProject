@@ -25,4 +25,6 @@ public interface ReplyService {
 		// 댓글 목록 : 몇 개의 데이터가 존재할 수 없기 때문에 칸을 직접 배열하는 array 보다는 list 더 맞다 
 		// bno 를 전달받아서 그 BNO 에 있는 댓글들만 가져오면 됨 
 		public List<ReplyVO> findAllByBNO(Criteria criteria, Long bno);
+		// 해당 게시글 전체 댓글 갯수 
+		public int getTotal(Long bno);
 }

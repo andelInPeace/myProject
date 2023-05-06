@@ -76,13 +76,17 @@ public class BoardController {
 		// url 중 / 뒷 부분 출력 
 		log.info(url.substring(url.lastIndexOf("/")) + " : " + bno);
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("user");
+		BoardVO boardVO = new BoardVO();
 		
 		if(memberDTO != null) {
+			model.addAttribute("user", memberDTO);
 			model.addAttribute("userId", memberDTO.getId());
 			model.addAttribute("board", boardService.get(bno));
+			model.addAttribute("boardId",boardVO.getUser_id());
 			return;
 		}
 		model.addAttribute("board", boardService.get(bno));
+	
 	}
 	
 	// 게시글 삭제 

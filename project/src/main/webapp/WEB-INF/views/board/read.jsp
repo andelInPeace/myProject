@@ -50,7 +50,10 @@
                 text-align: left;
    				/* margin-left: 62px */
             }
-	
+			a{
+				text-decoration: none;
+			}
+			
 			form > .fields {
 				text-align: left;
 				padding: 
@@ -88,13 +91,7 @@
 			
 		
 			
-			.reply-container {
-				display: inline-block;
-				width: 100%;
-				border: 1px solid #DCEBEC;
-				text-align: left;
 			
-			}
 			
 			ul.icons, ul.replies{
 				cursor: default;
@@ -141,6 +138,13 @@
     			flex-direction: column;
     			align-items: center;
 			}
+			.reply-container, #reply-container {
+				display: inline-block;
+				width: 100%;
+				border: 1px solid #DCEBEC;
+				text-align: left;
+			
+			}
 			.reply-b {
 				width: 50px;
     			font-size: 12px;
@@ -152,6 +156,14 @@
 				padding-bottom:12px;
 				text-align: left;
 				width: 80%;
+			}
+			#notice {
+				display:inline-block;
+				margin : 10px auto;
+				padding: 10px auto;
+				/* border: 1px solid gray; */
+				color:  #043C73;
+				font-size:  12px;
 			}
 	/* 		div.field{
 				padding: 1.5rem 0 0 4rem;
@@ -234,7 +246,12 @@
 								
 								
 								<div style="display:inline-block; text-align: left; margin-bottom: 8px; margin-top: 10px;">
-									<a class="btn btn-primary medieum register">댓글 등록</a>
+										<c:if test="${!empty user}">
+											<a class="btn btn-primary medieum register">댓글 등록</a>
+										</c:if>
+										<c:if test="${empty user}">
+	                          				<div id="notice">* 댓글은 가입 회원만 작성 가능합니다 *</div>
+	                          			</c:if>
 								</div>
 								<ul class="icons" style="margin:0;">
 									<li style="magin-top:5px;">
@@ -246,10 +263,10 @@
 									<div class="register-form" style="display:none;">
 										<div class="reply-f">
 											<h5>작성자</h5>
-											<input class="reply-container" name="user_id" placeholder="id" type="text">
+											<input class="reply-container replyId" name="user_id" type="text" value="${user.id}" readonly>
 										</div>
 										<div class="reply-f">
-											<h5>댓글 입력</h5>
+											<h5>댓글</h5>
 											<textarea class="reply-container" name="reply" rows="6" placeholder="comments" style="resize:none;"></textarea>
 										</div>	
 										<div class="field registerButtons">
@@ -259,6 +276,8 @@
 									</div> <!-- register-form -->
 								</div>
 								<ul class="replies"> </ul>
+								<div class="paging" style="text-align: center;"></div>
+								<input class="userId" type="hidden" value="${user.id}">
 							</form>
 						</div>
 			
@@ -287,34 +306,196 @@
         	
         	showList(page);
         	
+        	// 댓글 페이징 처리 
+        	function showReplyPage(total){
+        		
+        		let endNum = Math.ceil(page / 10.0) * 10;
+    			let startNum = endNum - 9;
+    			let prev = startNum != 1;
+    			let next = false;
+    			let str = "";
+        		
+        		if(endNum * 10 >= total){
+        			endNum = Math.ceil(total/10.0);
+        		}
+        		if(endNum * 10 < total){
+        			next = true;
+        		}
+        		
+        		if(prev){
+        			str += `<a class='changePage' href=` + (startNum-1) + `><code>&lt;</code></a>`;
+        		}
+        		
+        		for(let i = startNum; i <= endNum; i++){
+    				if(page == i){
+    					str += `<code style="display: inline-block; margin: 5px; font-size: 15px;">` + i + `</code>`;
+    				}else{
+    					str += `<a class='changePage' style="display: inline-block; margin: 5px; font-size: 15px;" href=` + i + `><code>` + i + `</code></a>`;
+    				}
+    			}
+        		
+        		if(next){
+        			str += `<a class='changePage' href=` + (endNum+1) + `><code>&gt;</code></a>`;
+        		}
+        		$("div.paging").html(str);
+        	}
+        	
         	function showList(page){
         		replyService.getList({
         			bno: bno,
         			page: page,
-        		},function(list){
+        		},function(result){
+        			let list = result.list;
+        			let total = result.total;
         			let str="";
         			let date = "";
+        			
 
         			for(let i=0; i<list.length;i++){
         				let check = false;
         				check = list[i].replyDate == list[i].updateDate;
         				date = check ? list[i].replyDate : list[i].updateDate;
+        				// 댓글 작성자 아이디 
+        				let replyId = list[i].user_id;
+        				// 세션 로그인 아이디 
+            			let userId = $("input.replyId").val();
+        				// 출력해보기 
+        				console.log("댓글작성자아이디: " + userId);
+        				console.log("세션로그인아이디: " + replyId);
+        				// str += `<c:if test="${'replyId' eq 'userId'}">`; 
+        				// str += `</c:if>`;
         		
-						str += `<li style="display:block;">`;
-						str += `<strong>`+ list[i].user_id +`</strong>`;
-						str += `<p style="margin-top: 5px;">`+ list[i].reply + `</p>`;
+						str += `<li id=` + list[i].rno + ` style="display: block;">`;	   
+						str += `<div style="display:flex; justify-content:space-between;">`;
+						str += `<strong style="display:block;" class="userId">`+ list[i].user_id +`</strong>`;
+						str += `<div>`
+						str += `<c:if test="${replyId eq userId}">`; 
+						str += `<a href= ` + list[i].rno + ` class="modify-ready" style="border:none;">수정</a>`;
+						str += `<a href= ` + list[i].rno + ` class="modify-finish" style="display:none;">완료</a>`;
+						str += `&nbsp;&nbsp;&nbsp;&nbsp;<a href= ` + list[i].rno + ` class="remove">삭제</a>`;
+						str += `</c:if>`;
+						str += `</div>`;
+						str += `</div>`;
+						str += `<p style="margin-top: 5px;" class=` + list[i].rno + `>`+ list[i].reply + `</p>`;
 						str += `<div style="display: block; text-align: right; font-size:small;">` + (check?"":"*") + replyService.displayTime(date) + `</div>`;
 						str += `<div class="line"></div>`;
 						str += `</li>`;
         			}
         			repliesUL.html(str);
+        			showReplyPage(total);
         		});
         	}
+        	
+        	// 페이지 이동 
+        	$("div.paging").on("click", "a.changePage", function(e){
+        		e.preventDefault();
+        		page = $(this).attr("href");
+        		showList(page);
+        	});
+        	
+        	
+        	$("a.finish").on("click", function(e){
+        		e.preventDefault();
+        		replyService.add({
+        			bno: bno,
+        			reply: $("textarea[name='reply']").val(),
+        			user_id: $("input[name='user_id']").val()
+        		}, function(){
+        			showList(page);
+        			$("textarea[name='reply']").val("");
+        			$("input[name='user_id']").val("");	
+        		});
+        	});
         	
         	$("a.register").on("click", function(e){
         		e.preventDefault();
         		$("div.register-form").show();
         		$(this).hide();
+        	});
+        	
+        	$("a.cancel").on("click", function(e){
+        		e.preventDefault();
+        		$("div.register-form").hide();
+        		$("a.register").show();
+        	});
+        	
+        	//한 댓글 수정 시 다른 댓글 수정 막기 
+        	let check = false;
+        	
+        	//수정 버튼 누르면 
+        	$("ul.replies").on("click", "a.modify-ready", function(e){
+        		e.preventDefault();
+        		const remove = $("a.remove");
+      
+        		if(check){
+        			alert("이미 수정중인 댓글이 있어요!!");
+        			return;
+        		}
+        		let finish = $("a.modify-finish");
+    			let rno = $(this).attr("href");
+        		const p = $("li#" + rno).find("p." + rno);
+        		
+        		
+        		$(this).hide();
+        		for(let i=0; i<finish.length;i++){
+        			if(finish[i].getAttribute("href")==rno){
+        				$(finish[i]).show();
+        				$(remove[i]).attr("class", "modify-cancel");
+                		$(remove[i]).text("취소");
+        				break;
+        			}
+        		}
+        		p.html("<textarea id = 'reply-container' class=" + rno + " style='resize: none; border:none outline:none;'>" + p.text() + "</textarea>");
+        		check = true;
+        	}); 
+        	
+        	
+        	
+        	// 완료 
+        	$("ul.replies").on("click","a.modify-finish",function(e){
+        		e.preventDefault();
+        		
+        		let rno = $(this).attr("href");
+        		const p = $("li#" + rno).find("p." + rno);
+        		
+        		replyService.modify({
+    				reply:  $("textarea." + rno).val(),
+    				rno: $(this).attr("href")
+        		}, function(){
+        			 p.html($("textarea." + rno).val());
+        			 
+        			 $(this).hide();
+        			 $(this).prev().show();
+        			 
+        			 showList(page);
+        			 check = false;
+        		});
+        	});
+        	
+        	// 수정취소 
+        	$("ul.replies").on("click", "a.modify-cancel",function(e){
+        		e.preventDefault();
+        		let rno = $(this).attr("href");
+        		const p = $("li#" + rno).find("p." + rno);
+        		
+        		p.html($("textarea." + rno).text());
+        		
+        		$(this).attr("class", "remove");
+        		$(this).text("삭제");
+        		$(this).prev().hide();
+        		$(this).prev().prev().show();
+        		check = false;
+        	});
+        	
+        	//삭제 
+        	$("ul.replies").on("click", "a.remove", function(e){
+        		e.preventDefault();
+        		
+        		if(confirm("정말 삭제하시겠습니까?")){
+	        		replyService.remove($(this).attr("href"),function(){
+	        			showList(page);
+	        		});
+        		}
         	});
         	
         	

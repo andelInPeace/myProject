@@ -20,6 +20,13 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
+        
+        <style>
+        	img {
+        		width: 25px;
+        		margin: 5px;
+        	}
+        </style>
     </head>
 	<body>
 
@@ -38,7 +45,13 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0"> 정신병 걸리기 좋은 시간 ${serverTime} .</p>
+                <%-- <p class="masthead-subheading font-weight-light mb-0"> 정신병 걸리기 좋은 시간 ${serverTime} .</p> --%>
+                <p class="masthead-subheading font-weight-light mb-0"> 이런 분들 언제나 <img src="resources/assets/img/part01.png">환영<img src="resources/assets/img/part01.png" width="10px"></p>
+                <br>
+           		 <p class="masthead-subheading font-weight-light mb-0"><img src="resources/assets/img/cat01.png"> 인강에서 강사님이 시키는 대로 했는데 안돼서 머리 싸매고 계신 분</p>
+           		 <p class="masthead-subheading font-weight-light mb-0"><img src="resources/assets/img/cat01.png"> 교재에 적혀있는 대로 했는데 안돼서 머리 싸매고 계신 분</p>
+           		 <p class="masthead-subheading font-weight-light mb-0"><img src="resources/assets/img/cat01.png"> 인터넷 검색해도 딱 맞는 해결법이 나와서 머리 싸매고 계신 분</p>
+           		 <p class="masthead-subheading font-weight-light mb-0"></p>
             </div>
 		</header>
 		

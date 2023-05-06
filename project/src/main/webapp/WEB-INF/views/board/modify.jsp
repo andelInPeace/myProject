@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>게시글 수정</title>
+        <title>게시글</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -92,7 +92,12 @@
 	 <section class="page-section" id="contact">
             <div class="container">
                 <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Board Modification</h2>
+                <c:if test="${board.register ne 1}">
+               		 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Board Modification</h2>
+                </c:if>
+                <c:if test="${board.register eq 1}">
+               		 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Board Register</h2>
+                </c:if>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
