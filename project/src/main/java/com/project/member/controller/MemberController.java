@@ -45,8 +45,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping(value="/register", consumes="application/json", produces={MediaType.TEXT_PLAIN_VALUE})
 	public String register(@RequestBody MemberDTO memberDTO) {
-		System.out.println("좀 되라 ...");
-		log.info("좀되라 ... ");
+		System.out.println("가입 회원 ......");
 		
 		int member = memberService.checkIdDuple(memberDTO);
 		if(member != 0) {
@@ -57,9 +56,6 @@ public class MemberController {
 			memberService.register(memberDTO);
 			return "success";
 		
-		//rttr.addFlashAttribute("result", "success");
-		
-		//return "redirect:/member/register";
 	}
 
 	
@@ -81,9 +77,6 @@ public class MemberController {
 		
 		MemberDTO loginMember = memberService.loginMember(memberDTO);
 		
-//		if(loginMember == null){
-//			throw new Exception("아이디와 비밀번호가 일치하지 않습니다.");
-//		};
 		
 		if(loginMember !=null) {
 			System.out.println(loginMember);

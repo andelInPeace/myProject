@@ -5,7 +5,7 @@
 	.footerMsg{
 		display: block;
 		color: white;
-		font-size: 16px;
+		font-size: 17px;
 		font-style: italic;
 	}
 </style>
@@ -27,9 +27,9 @@
                     -->
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0" style="margin: 0 auto;">
-                        <h4 class="footerMsg" style="margin-bottom: 5px;">You will face many defeats in your life,</h4>
-                        <h4 class="footerMsg" style="margin-bottom: 15px;"> but never let yourself defeated.</h4>
-                        <h4 class="footerMsg">Maya Angelou</h4>
+                        <p class="footerMsg" style="margin-bottom: 5px;">You will face many defeats in your life,</p>
+                        <p class="footerMsg" style="margin-bottom: 15px;"> but never let yourself defeated.</p>
+                        <p class="footerMsg">Maya Angelou</p>
                     </div>
                     <!-- Footer About Text
                     <div class="col-lg-4">

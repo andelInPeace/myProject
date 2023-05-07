@@ -72,7 +72,6 @@ public class BoardController {
 	public void read(Criteria criteria, Long bno, HttpServletRequest request, HttpSession session, Model model) {
 		// 요청 들어온 Url 추출 
 		String url = request.getRequestURI();
-		//String realUrl = url.substring(url.lastIndexOf("/")); 
 		// url 중 / 뒷 부분 출력 
 		log.info(url.substring(url.lastIndexOf("/")) + " : " + bno);
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("user");

@@ -46,6 +46,16 @@
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
-	
+	<!-- 인터셉터 필요시 주석 풀어서 사용할 것 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/update"/>
+			<mapping path="/member/viewmember"/>
+			<mapping path="/board/modify"/>
+			<mapping path="/board/register"/>
+			<beans:bean class="com.project.interceptor.LoginCheckInterceptor"/> 
+		</interceptor>
+		
+	</interceptors> 
 	
 </beans:beans>

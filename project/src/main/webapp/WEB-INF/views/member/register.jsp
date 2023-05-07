@@ -136,47 +136,50 @@
         		$("#submit").click(function(e){
             		e.preventDefault();
             		
-           			var name = $("input[name='name']").val();
-            		var id = $("input[name='id']").val();
-            		var pw = $("input[name='pw']").val();
-            		var email = $("input[name='email']").val();
-            		var phone = $("input[name='phone']").val();
-            		var number = pw.search(/[0-9]/g);
-            	    var english = pw.search(/[a-z]/ig);
-            	    var spece = pw.search(/[`~!@@#$%^&*|₩₩₩\'₩\";:₩/?]/gi);
-            	               	   
+           			let name = $("input[name='name']").val();
+           			let id = $("input[name='id']").val();
+           			let pw = $("input[name='pw']").val();
+           			let email = $("input[name='email']").val();
+           			let phone = $("input[name='phone']").val();
+           			let number = pw.search(/[0-9]/g);
+           			let english = pw.search(/[a-z]/ig);
+           			let spece = pw.search(/[`~!@@#$%^&*|₩₩₩\'₩\";:₩/?]/gi);
+           			let regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;	
+           			let regPhone =  /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+           			
+           			// 이름 체크   
             	    if(!name){
             	    	alert("이름을 넣어주세요.");
-            	    	return false;
-            	    } else if (id.length < 5 || id.length > 15){
+            	    	return;
+            	    } 
+            	 	// id 체크
+            	    if (id.length < 5 || id.length > 15){
             			alert("id는 5 ~ 15 이내로 입력해주세요.");
-            			return false;
-            		} else if(pw.length < 8 || pw.length > 15){
+            			return;
+            		} 
+            	 	// pw 체크
+            	    if(pw.length < 8 || pw.length > 15){
             			alert("pw는 8 ~ 15 이내로 입력해주세요.");            			
-            			return false;
+            			return;
             		 } else if (pw.search(/\s/) != -1) {
             	        alert("비밀번호는 공백 없이 입력해주세요.");           	       
-            	        return false;
-            		} else if (!email){
+            	        return;
+            		} 
+            		// email 체크
+            	    if (!email){
             			alert("email을 확인 해 주세요."); 
-            			return false;
-            		} else if(email){
-            			var regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;	
-            				if (!regEmail.test(email)) {	
-            			        alert('이메일 형식에 맞춰주세요.');
-            			        return false; 
-            			  	} 
-            		}
-            	    // 연락처 확인 
+            			return;
+            		} else if(email && !regEmail.test(email)){
+           			    alert('email 형식에 맞춰서 작성 해주세요.');
+           			    return; 
+            		} 
+            	    // phone 체크 
             	    if(!phone){
             			alert("연락처를 확인 해 주세요.");
-            			return false;
-            		} else if (phone){
-            			var regPhone =  /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
-            				if(!regPhone.test(phone)){
-        						alert("연락처 형식을 확인 해 주세요.");          			
-        						return true;
-        					}	
+            			return;
+            		} else if (phone && !regPhone.test(phone)){
+        				alert("연락처 형식을 확인 해 주세요.");          			
+        				return;
             		}
             		
             		 // 비번 중복 체크 및 아이디 중복 체크 

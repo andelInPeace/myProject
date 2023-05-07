@@ -125,6 +125,45 @@
         	$(document).ready(function(e){
         		$("#submitButton").click(function(e){
             		e.preventDefault();
+            		
+            		let id = $("input[name='id']").val();
+            		let pw = $("input[name='pw']").val();
+            		let email = $("input[name='email']").val();
+            		let phone = $("input[name='phone']").val();
+            		let number = pw.search(/[0-9]/g);
+            	    let english = pw.search(/[a-z]/ig);
+            	    let spece = pw.search(/[`~!@@#$%^&*|₩₩₩\'₩\";:₩/?]/gi);
+            	               	   
+            	   
+            	    
+            		if(pw.length < 8 || pw.length > 15){
+            			alert("pw는 8 ~ 15 이내로 입력해주세요.");            			
+            			return false;
+            		 } else if (pw.search(/\s/) != -1) {
+            	        alert("비밀번호는 공백 없이 입력해주세요.");           	       
+            	        return false;
+            		} else if (!email){
+            			alert("email을 확인 해 주세요."); 
+            			return false;
+            		} else if(email){
+            			var regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;	
+            				if (!regEmail.test(email)) {	
+            			        alert('email 형식에 맞춰서 작성 해주세요.');
+            			        return true; 
+            			  	} 
+            		}
+            	   
+            	    if(!phone){
+            			alert("연락처를 확인 해 주세요.");
+            			return false;
+            		} else if (phone){
+            			var regPhone =  /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+            				if(!regPhone.test(phone)){
+        						alert("연락처 형식을 확인 해 주세요.");          			
+        						return true;
+        					}	
+            		}
+            		
             		if($('#pw').val() != $('#pw_check').val()){
             			alert('비밀번호를 다시 확인해주세요!!');
             			return;

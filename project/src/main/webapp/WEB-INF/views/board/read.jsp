@@ -22,7 +22,13 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
 		
 		<style>
-			body{}
+			/* body{} */
+			.footerMsg{
+				display: block;
+				color: white;
+				font-size: 16px;
+				font-style: italic;
+			}
 			 #submitButton, #deleteButton {
 			 	 display: inline-block;
 			 	 /* float: left; */
@@ -128,7 +134,7 @@
 			}
 			a.register{
 				display: inline-block;
-				font-size: 14px;
+				font-size: 16px;
    			 	width: 100%;
 			}
 			.register-form {
@@ -242,16 +248,17 @@
 										<!-- <a href="/board/list" class="btn btn-primary finish">이전</a> -->
 										<!-- <a href="javascript:void(0)" class="btn btn-primary finish">수정</a>
 										<a href="javascript:void(0)" class="btn btn-primary cancel">삭제</a> -->
-								</div>
 								
 								
-								<div style="display:inline-block; text-align: left; margin-bottom: 8px; margin-top: 10px;">
-										<c:if test="${!empty user}">
-											<a class="btn btn-primary medieum register">댓글 등록</a>
-										</c:if>
-										<c:if test="${empty user}">
-	                          				<div id="notice">* 댓글은 가입 회원만 작성 가능합니다 *</div>
-	                          			</c:if>
+								
+									<div style="display:inline-block; text-align: left; margin-bottom: 8px; margin-top: 10px;">
+											<c:if test="${!empty user}">
+												<a class="btn btn-primary medieum register">댓글 등록</a>
+											</c:if>
+											<c:if test="${empty user}">
+		                          				<div id="notice">* 댓글은 가입 회원만 작성 가능합니다 *</div>
+		                          			</c:if>
+									</div>
 								</div>
 								<ul class="icons" style="margin:0;">
 									<li style="magin-top:5px;">
@@ -362,18 +369,17 @@
         				// 출력해보기 
         				console.log("댓글작성자아이디: " + userId);
         				console.log("세션로그인아이디: " + replyId);
-        				// str += `<c:if test="${'replyId' eq 'userId'}">`; 
-        				// str += `</c:if>`;
+
         		
 						str += `<li id=` + list[i].rno + ` style="display: block;">`;	   
 						str += `<div style="display:flex; justify-content:space-between;">`;
 						str += `<strong style="display:block;" class="userId">`+ list[i].user_id +`</strong>`;
 						str += `<div>`
-						str += `<c:if test="${replyId eq userId}">`; 
-						str += `<a href= ` + list[i].rno + ` class="modify-ready" style="border:none;">수정</a>`;
-						str += `<a href= ` + list[i].rno + ` class="modify-finish" style="display:none;">완료</a>`;
-						str += `&nbsp;&nbsp;&nbsp;&nbsp;<a href= ` + list[i].rno + ` class="remove">삭제</a>`;
-						str += `</c:if>`;
+						if(replyId == userId){
+							str += `<a href= ` + list[i].rno + ` class="modify-ready" style="border:none;">수정</a>`;
+							str += `<a href= ` + list[i].rno + ` class="modify-finish" style="display:none;">완료</a>`;
+							str += `&nbsp;&nbsp;&nbsp;&nbsp;<a href= ` + list[i].rno + ` class="remove">삭제</a>`;
+						}
 						str += `</div>`;
 						str += `</div>`;
 						str += `<p style="margin-top: 5px;" class=` + list[i].rno + `>`+ list[i].reply + `</p>`;

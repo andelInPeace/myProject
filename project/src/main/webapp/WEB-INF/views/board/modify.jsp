@@ -123,11 +123,11 @@
 							 		</c:if>
 									<div class="field">
 										<h4>* 제목</h4>
-										<input type="text" class="container" name="title" value="${board.title}" />
+										<input type="text" class="container" name="title" value="${board.title}" required/>
 							 		</div>
 									<div class="field" style="display:flex; align-items:center;">
 										<h4>* 내용</h4>
-										<textarea name="content" class="container" rows="8" placeholder="Content" style="resize:none; margin-left:0;">${board.content}</textarea>
+										<textarea name="content" class="container" rows="8" placeholder="Content" style="resize:none; margin-left:0;" required>${board.content}</textarea>
 									</div>
 								
 									 <div class="field" id="secret" style="display:flex;  align-items:center;">
@@ -180,14 +180,33 @@
         <script src="/resources/assets/js/reply.js"></script>
         
         <script>
-        
+        	
+       		let title = $('input[name="title"]').val();
+			let content = $('textarea[name="content"]').val();
+		
+        	/* $('input[name="submit"]').on("click", function(e){
+        		e.prevenDefault;
+        		
+        		if(!title){
+        			alert("제목을 입력해주세요.");
+        			return false;
+        		} else if (!title){
+        			alert("내용을 입력해주세요.");
+        			return true;
+        		}
+        		
+        		location.href = "/";   
+        	} */
         	$(document).ready(function(){
         		let secretVal = $('input:checkbox[name="secret"]').val();
         		console.log(secretVal);
         		
+        		
+        		
         		if(secretVal == '1'){
     				$('input:checkbox[name="secret"]').attr("checked",true);
     			}
+        		
         		
         		
         		$('input[type=checkbox][name=secret]').change(function() {
